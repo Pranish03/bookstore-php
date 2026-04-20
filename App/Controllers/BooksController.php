@@ -20,6 +20,19 @@ class BooksController extends BaseController
         $this->view('admin.books.index', ['books' => $books]);
     }
 
+    public function show($id)
+    {
+        $book = $this->book->find($id);
+
+        if (! $book) {
+            $_SESSION['error'] = 'Book not found.';
+            header('Location: /admin/books');
+            exit;
+        }
+
+        $this->view('admin.books.show', ['book' => $book]);
+    }
+
     public function create()
     {
         $this->view('admin.books.create');
@@ -122,6 +135,27 @@ class BooksController extends BaseController
         $this->book->update($id, $data);
 
         $_SESSION['success'] = 'Book updated successfully.';
+        header('Location: /admin/books');
+        exit;
+    }
+
+    public function destroy($id)
+    {
+        $book = $this->book->find($id);
+
+        if (! $book) {
+            $_SESSION['error'] = 'Book not found.';
+            header('Location: /admin/books');
+            exit;
+        }
+
+        if (file_exists(__DIR__ . '/../../public/' . $book['image'])) {
+            unlink(__DIR__ . '/../../public/' . $book['image']);
+        }
+
+        $this->book->delete($id);
+
+        $_SESSION['success'] = 'Book deleted successfully.';
         header('Location: /admin/books');
         exit;
     }

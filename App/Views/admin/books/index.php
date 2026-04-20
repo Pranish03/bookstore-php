@@ -26,14 +26,18 @@ start_layout();
             <?php foreach ($books as $index => $book): ?>
                 <tr>
                     <td><?= ++$index ?></td>
-                    <td><?= $book['title'] ?></td>
+                    <td>
+                        <a href="/admin/books/<?= $book['id'] ?>">
+                            <?= $book['title'] ?>
+                        </a>
+                    </td>
                     <td><?= $book['author'] ?></td>
                     <td><?= $book['price'] ?></td>
                     <td>
                         <a href="/admin/books/<?= $book['id'] ?>/edit">Edit</a>
-                        <form method="POST" style="display: inline;">
+                        <form method="POST" action="/admin/books/<?= $book['id'] ?>" style="display: inline;">
                             <input type="hidden" name="_method" value="DELETE">
-                            <button type="submit">Delete</button>
+                            <button type="submit" onclick="return confirm('Are you dure You want to delete this book?')">Delete</button>
                         </form>
                     </td>
                 </tr>
