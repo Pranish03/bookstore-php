@@ -8,7 +8,9 @@ class BaseController
     {
         extract($data);
 
-        $fullPath = __DIR__ . "/../Views/{$view}.php";
+        $viewPath = str_replace('.', '/', $view);
+
+        $fullPath = __DIR__ . "/../Views/{$viewPath}.php";
 
         if (!file_exists($fullPath)) {
             throw new \Exception("View {$view} not found at: {$fullPath}");

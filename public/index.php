@@ -1,9 +1,13 @@
 <?php
 
+require __DIR__ . '/../vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
+
 use AltoRouter;
 use App\Controllers\HomeController;
 
-require __DIR__ . '/../vendor/autoload.php';
 
 $router = new AltoRouter();
 $router->setBasePath('');
