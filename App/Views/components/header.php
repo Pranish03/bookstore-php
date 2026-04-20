@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h3>Hello World</h3>
-</body>
-
-</html>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/books">Books</a>
+    </nav>

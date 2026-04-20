@@ -7,7 +7,6 @@ use AltoRouter;
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../');
 $dotenv->load();
 
-
 $router = new AltoRouter();
 $router->setBasePath('');
 
