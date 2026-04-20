@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require __DIR__ . '/../vendor/autoload.php';
 
 use AltoRouter;
@@ -11,6 +13,10 @@ $router = new AltoRouter();
 $router->setBasePath('');
 
 require __DIR__ . '/../routes/web.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['_method'])) {
+    $_SERVER['REQUEST_METHOD'] = strtoupper($_POST['_method']);
+}
 
 $match = $router->match();
 

@@ -7,7 +7,7 @@ class BookValidator
     private array $errors = [];
     private array $data = [];
 
-    public function validate(array $post, array $files): bool
+    public function validate(array $post, array $files, bool $requireImage = true): bool
     {
         $this->errors = [];
 
@@ -53,9 +53,13 @@ class BookValidator
             $this->errors['pages'] = 'Pages must be a positive integer.';
         }
 
-        if (empty($files['image']['name'])) {
-            $this->errors['image'] = 'Image is required.';
-        } else {
+        if ($requireImage) {
+            if (empty($files['image']['name'])) {
+                $this->errors['image'] = 'Image is required.';
+            }
+        }
+
+        if (!empty($files['image']['name'])) {
             $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
             $maxSize = 2 * 1024 * 1024;
 
