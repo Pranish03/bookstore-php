@@ -13,20 +13,30 @@ class PageController extends BaseController
         $this->book = new Book();
     }
 
-    public function index()
+    public function home()
     {
         $books = $this->book->all();
         $this->view('page.index', ['books' => $books]);
     }
 
-    public function show($id)
+    public function book($id)
     {
         $book = $this->book->find($id);
         if (!$book) {
             $this->not_found();
             return;
         }
-        $this->view('page.show', ['book' => $book]);
+        $this->view('page.book', ['book' => $book]);
+    }
+
+    public function register()
+    {
+        $this->view('page.register');
+    }
+
+    public function login()
+    {
+        $this->view('page.login');
     }
 
     public function not_found()
