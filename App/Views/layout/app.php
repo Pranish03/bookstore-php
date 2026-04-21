@@ -23,6 +23,7 @@
                 <?php if (isset($_SESSION['user'])): ?>
                     <li><a href="/orders">Orders</a></li>
                     <li><a href="/cart">Cart (<?= $cartCount ?>)</a></li>
+                    <li><a href="/profile">Profile</a></li>
                     <li>
                         <form action="/logout" method="post">
                             <button type="submit">Logout</button>

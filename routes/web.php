@@ -2,6 +2,7 @@
 
 use App\Controllers\PageController;
 use App\Controllers\AuthController;
+use App\Controllers\ProfileController;
 use App\Controllers\CartController;
 use App\Controllers\CheckoutController;
 use App\Controllers\UsersController;
@@ -10,6 +11,7 @@ use App\Controllers\OrdersController;
 
 
 $pageController  = new PageController();
+$profileController = new ProfileController();
 $authController  = new AuthController();
 $cartController = new CartController();
 $checkoutController = new CheckoutController();
@@ -26,6 +28,12 @@ $router->map('GET', '/login', [$pageController,  'login']);
 $router->map('POST', '/register', [$authController,  'register']);
 $router->map('POST', '/login', [$authController,  'login']);
 $router->map('POST', '/logout', [$authController,  'logout']);
+
+$router->map('GET', '/profile', [$profileController, 'show']);
+$router->map('POST', '/profile/update-info', [$profileController, 'updateInfo']);
+$router->map('POST', '/profile/change-password', [$profileController, 'changePassword']);
+$router->map('POST', '/profile/upload-avatar', [$profileController, 'uploadAvatar']);
+$router->map('POST', '/profile/remove-avatar', [$profileController, 'removeAvatar']);
 
 $router->map('GET', '/cart', [$cartController, 'index']);
 $router->map('POST', '/cart/add', [$cartController, 'add']);
