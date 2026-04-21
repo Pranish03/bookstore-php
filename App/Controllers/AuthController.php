@@ -5,14 +5,17 @@ namespace App\Controllers;
 use App\Models\User;
 use App\Middlewares\GuestMiddleware;
 use App\Middlewares\AuthMiddleware;
+use App\Models\Cart;
 use App\Validation\AuthValidator;
 
 class AuthController extends BaseController
 {
     private User $user;
+    private Cart $cart;
 
     public function __construct()
     {
+        $this->cart = new Cart();
         $this->user = new User();
     }
 
@@ -53,6 +56,9 @@ class AuthController extends BaseController
 
         $_SESSION['user']    = $sessionUser;
         $_SESSION['success'] = 'Registration successful.';
+
+        $this->cart->mergeSessionCartIntoUser(session_id(), $sessionUser['id']);
+
         header('Location: /');
         exit;
     }
@@ -86,6 +92,9 @@ class AuthController extends BaseController
 
         $_SESSION['user']    = $user;
         $_SESSION['success'] = 'Welcome back, ' . $user['name'] . '!';
+
+        $this->cart->mergeSessionCartIntoUser(session_id(), $user['id']);
+
         header('Location: /');
         exit;
     }

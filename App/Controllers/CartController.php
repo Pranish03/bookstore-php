@@ -1,0 +1,86 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Models\Book;
+use App\Models\Cart;
+use App\Models\CartItem;
+
+class CartController extends BaseController
+{
+    private Cart $cart;
+    private CartItem $cartItem;
+    private Book $book;
+
+    public function __construct()
+    {
+        $this->cart     = new Cart();
+        $this->cartItem = new CartItem();
+        $this->book     = new Book();
+    }
+
+    private function resolveCart(): array
+    {
+        if (isset($_SESSION['user'])) {
+            return $this->cart->getOrCreateForUser($_SESSION['user']['id']);
+        }
+
+        return $this->cart->getOrCreateForSession(session_id());
+    }
+
+    public function index()
+    {
+        $cart  = $this->resolveCart();
+        $items = $this->cartItem->getByCart($cart['id']);
+        $total = $this->cartItem->getTotal($cart['id']);
+
+        $this->view('page.cart', compact('items', 'total'));
+    }
+
+    public function add()
+    {
+        $bookId = (int) ($_POST['book_id'] ?? 0);
+        $book   = $this->book->find($bookId);
+
+        if (! $book) {
+            $_SESSION['error'] = 'Book not found.';
+            header('Location: /');
+            exit;
+        }
+
+        $cart = $this->resolveCart();
+        $this->cartItem->addItem($cart['id'], $bookId);
+
+        $_SESSION['success'] = "'{$book['title']}' added to cart.";
+        header('Location: /cart');
+        exit;
+    }
+
+    public function update()
+    {
+        $cart     = $this->resolveCart();
+        $id       = (int) ($_POST['cart_item_id'] ?? 0);
+        $quantity = (int) ($_POST['quantity'] ?? 1);
+
+        if ($quantity < 1) {
+            $this->cartItem->removeItem($id, $cart['id']);
+        } else {
+            $this->cartItem->updateQuantity($id, $quantity);
+        }
+
+        header('Location: /cart');
+        exit;
+    }
+
+    public function remove()
+    {
+        $cart = $this->resolveCart();
+        $id   = (int) ($_POST['cart_item_id'] ?? 0);
+
+        $this->cartItem->removeItem($id, $cart['id']);
+
+        $_SESSION['success'] = 'Item removed from cart.';
+        header('Location: /cart');
+        exit;
+    }
+}

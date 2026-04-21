@@ -2,10 +2,13 @@
 
 use App\Controllers\PageController;
 use App\Controllers\AuthController;
+use App\Controllers\CartController;
 use App\Controllers\BooksController;
+
 
 $pageController  = new PageController();
 $authController  = new AuthController();
+$cartController = new CartController();
 $booksController = new BooksController();
 
 $router->map('GET', '/', [$pageController,  'home']);
@@ -16,6 +19,11 @@ $router->map('GET', '/login', [$pageController,  'login']);
 $router->map('POST', '/register', [$authController,  'register']);
 $router->map('POST', '/login', [$authController,  'login']);
 $router->map('POST', '/logout', [$authController,  'logout']);
+
+$router->map('GET',  '/cart',        [$cartController, 'index']);
+$router->map('POST', '/cart/add',    [$cartController, 'add']);
+$router->map('POST', '/cart/update', [$cartController, 'update']);
+$router->map('POST', '/cart/remove', [$cartController, 'remove']);
 
 $router->map('GET', '/admin/books', [$booksController, 'index']);
 $router->map('GET', '/admin/books/create', [$booksController, 'create']);

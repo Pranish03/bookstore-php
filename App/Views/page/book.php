@@ -19,7 +19,10 @@ start_layout();
 
     <p><?= htmlspecialchars($book['author']) ?></p>
 
-    <button>Add to Cart</button>
+    <form action="/cart/add" method="POST">
+        <input type="hidden" name="book_id" value="<?= (int) $book['id'] ?>">
+        <button type="submit">Add to Cart</button>
+    </form>
 
     <p><?= htmlspecialchars($book['description']) ?></p>
 
