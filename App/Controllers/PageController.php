@@ -17,7 +17,7 @@ class PageController extends BaseController
     public function home()
     {
         $books = $this->book->all();
-        $this->view('page.index', ['books' => $books]);
+        $this->view('page.index', compact('books'));
     }
 
     public function book($id)
@@ -27,7 +27,7 @@ class PageController extends BaseController
             $this->not_found();
             return;
         }
-        $this->view('page.book', ['book' => $book]);
+        $this->view('page.book', compact('book'));
     }
 
     public function search()
@@ -35,8 +35,7 @@ class PageController extends BaseController
         $query = trim($_GET['q'] ?? '');
 
         if (empty($query)) {
-            header('Location: /');
-            exit;
+            $this->redirect('/');
         }
 
         $books = $this->book->search($query);

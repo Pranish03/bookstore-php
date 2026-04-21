@@ -49,8 +49,7 @@ class ProfileController extends BaseController
             $_SESSION['errors']     = $errors;
             $_SESSION['old_input']  = $_POST;
             $_SESSION['active_tab'] = 'info';
-            header('Location: /profile');
-            exit;
+            $this->redirect('/profile');
         }
 
         $this->user->update($userId, ['name' => $name, 'email' => $email]);
@@ -60,8 +59,7 @@ class ProfileController extends BaseController
 
         $_SESSION['success']    = 'Profile updated successfully.';
         $_SESSION['active_tab'] = 'info';
-        header('Location: /profile');
-        exit;
+        $this->redirect('/profile');
     }
 
     public function changePassword()
@@ -97,8 +95,7 @@ class ProfileController extends BaseController
         if (!empty($errors)) {
             $_SESSION['errors']    = $errors;
             $_SESSION['active_tab'] = 'password';
-            header('Location: /profile');
-            exit;
+            $this->redirect('/profile');
         }
 
         $this->user->update($userId, [
@@ -107,8 +104,7 @@ class ProfileController extends BaseController
 
         $_SESSION['success']    = 'Password changed successfully.';
         $_SESSION['active_tab'] = 'password';
-        header('Location: /profile');
-        exit;
+        $this->redirect('/profile');
     }
 
     public function uploadAvatar()
@@ -121,8 +117,7 @@ class ProfileController extends BaseController
         if (!$file || $file['error'] !== UPLOAD_ERR_OK) {
             $_SESSION['errors']     = ['avatar' => 'Please select an image to upload.'];
             $_SESSION['active_tab'] = 'avatar';
-            header('Location: /profile');
-            exit;
+            $this->redirect('/profile');
         }
 
         $allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
@@ -131,15 +126,13 @@ class ProfileController extends BaseController
         if (!in_array($file['type'], $allowedTypes)) {
             $_SESSION['errors']     = ['avatar' => 'Image must be JPG, PNG, or WEBP.'];
             $_SESSION['active_tab'] = 'avatar';
-            header('Location: /profile');
-            exit;
+            $this->redirect('/profile');
         }
 
         if ($file['size'] > $maxSize) {
             $_SESSION['errors']     = ['avatar' => 'Image must be under 2MB.'];
             $_SESSION['active_tab'] = 'avatar';
-            header('Location: /profile');
-            exit;
+            $this->redirect('/profile');
         }
 
         $ext        = pathinfo($file['name'], PATHINFO_EXTENSION);
@@ -162,8 +155,7 @@ class ProfileController extends BaseController
         if (!move_uploaded_file($file['tmp_name'], $uploadPath)) {
             $_SESSION['errors']     = ['avatar' => 'Failed to upload image. Please try again.'];
             $_SESSION['active_tab'] = 'avatar';
-            header('Location: /profile');
-            exit;
+            $this->redirect('/profile');
         }
 
         $profilePath = 'uploads/avatars/' . $filename;
@@ -173,8 +165,7 @@ class ProfileController extends BaseController
 
         $_SESSION['success']    = 'Profile picture updated.';
         $_SESSION['active_tab'] = 'avatar';
-        header('Location: /profile');
-        exit;
+        $this->redirect('/profile');
     }
 
     public function removeAvatar()
@@ -196,8 +187,7 @@ class ProfileController extends BaseController
 
         $_SESSION['success']    = 'Profile picture removed.';
         $_SESSION['active_tab'] = 'avatar';
-        header('Location: /profile');
-        exit;
+        $this->redirect('/profile');
     }
 
     private function isEmailTakenByOther(string $email, int $userId): bool

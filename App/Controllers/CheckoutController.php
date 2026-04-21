@@ -32,8 +32,7 @@ class CheckoutController extends BaseController
 
         if (empty($items)) {
             $_SESSION['error'] = 'Your cart is empty.';
-            header('Location: /cart');
-            exit;
+            $this->redirect('/cart');
         }
 
         $total = $this->cartItem->getTotal($cart['id']);
@@ -51,8 +50,7 @@ class CheckoutController extends BaseController
 
         if (empty($items)) {
             $_SESSION['error'] = 'Your cart is empty.';
-            header('Location: /cart');
-            exit;
+            $this->redirect('/cart');
         }
 
         $name    = trim($_POST['name'] ?? '');
@@ -68,8 +66,7 @@ class CheckoutController extends BaseController
         if (! empty($errors)) {
             $_SESSION['errors']    = $errors;
             $_SESSION['old_input'] = $_POST;
-            header('Location: /checkout');
-            exit;
+            $this->redirect('/checkout');
         }
 
         $total = $this->cartItem->getTotal($cart['id']);
@@ -96,8 +93,7 @@ class CheckoutController extends BaseController
         $this->cartItem->clearCart($cart['id']);
 
         $_SESSION['success'] = 'Order placed successfully!';
-        header('Location: /orders/' . $orderId);
-        exit;
+        $this->redirect("/orders/{$orderId}");
     }
 
     public function show($id)
@@ -134,14 +130,12 @@ class CheckoutController extends BaseController
 
         if ($order['status'] !== 'pending') {
             $_SESSION['error'] = 'Only pending orders can be cancelled.';
-            header("Location: /orders/{$id}");
-            exit;
+            $this->redirect("/orders/{$id}");
         }
 
         $this->order->update($id, ['status' => 'cancelled']);
 
         $_SESSION['success'] = 'Order cancelled successfully.';
-        header("Location: /orders/{$id}");
-        exit;
+        $this->redirect("/orders/{$id}");
     }
 }

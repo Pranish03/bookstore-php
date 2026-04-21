@@ -33,11 +33,10 @@ class BooksController extends BaseController
 
         if (! $book) {
             $_SESSION['error'] = 'Book not found.';
-            header('Location: /admin/books');
-            exit;
+            $this->redirect('/admin/books');
         }
 
-        $this->view('admin.books.show', ['book' => $book]);
+        $this->view('admin.books.show', compact('book'));
     }
 
     public function create()
@@ -56,8 +55,7 @@ class BooksController extends BaseController
         if (! $validator->validate($_POST, $_FILES, true)) {
             $_SESSION['errors']    = $validator->errors();
             $_SESSION['old_input'] = $_POST;
-            header('Location: /admin/books/create');
-            exit;
+            $this->redirect('/admin/books/create');
         }
 
         $data = $validator->validated();
@@ -74,8 +72,7 @@ class BooksController extends BaseController
         if (! move_uploaded_file($image['tmp_name'], $uploadPath)) {
             $_SESSION['errors']    = ['image' => 'Failed to upload image.'];
             $_SESSION['old_input'] = $_POST;
-            header('Location: /admin/books/create');
-            exit;
+            $this->redirect('/admin/books/create');
         }
 
         $data['image'] = 'uploads/books/' . $filename;
@@ -83,8 +80,8 @@ class BooksController extends BaseController
         $this->book->create($data);
 
         $_SESSION['success'] = 'Book added successfully.';
-        header('Location: /admin/books');
-        exit;
+
+        $this->redirect('/admin/books');
     }
 
     public function edit($id)
@@ -95,12 +92,12 @@ class BooksController extends BaseController
 
         if (! $book) {
             $_SESSION['error'] = 'Book not found.';
-            header('Location: /admin/books');
-            exit;
+            $this->redirect('/admin/books');
         }
 
-        $this->view('admin.books.edit', ['book' => $book]);
+        $this->view('admin.books.edit', compact('book'));
     }
+
     public function update($id)
     {
         (new AdminMiddleware())->handle();
@@ -109,8 +106,7 @@ class BooksController extends BaseController
 
         if (! $book) {
             $_SESSION['error'] = 'Book not found.';
-            header('Location: /admin/books');
-            exit;
+            $this->redirect('/admin/books');
         }
 
         $validator = new BookValidator();
@@ -118,8 +114,7 @@ class BooksController extends BaseController
         if (! $validator->validate($_POST, $_FILES, false)) {
             $_SESSION['errors']    = $validator->errors();
             $_SESSION['old_input'] = $_POST;
-            header("Location: /admin/books/{$id}/edit");
-            exit;
+            $this->redirect("/admin/books/{$id}/edit");
         }
 
         $data = $validator->validated();
@@ -142,16 +137,14 @@ class BooksController extends BaseController
             } else {
                 $_SESSION['errors']    = ['image' => 'Failed to upload image.'];
                 $_SESSION['old_input'] = $_POST;
-                header("Location: /admin/books/{$id}/edit");
-                exit;
+                $this->redirect("/admin/books/{$id}/edit");
             }
         }
 
         $this->book->update($id, $data);
 
         $_SESSION['success'] = 'Book updated successfully.';
-        header('Location: /admin/books');
-        exit;
+        $this->redirect('/admin/books');
     }
 
     public function destroy($id)
@@ -162,8 +155,7 @@ class BooksController extends BaseController
 
         if (! $book) {
             $_SESSION['error'] = 'Book not found.';
-            header('Location: /admin/books');
-            exit;
+            $this->redirect('/admin/books');
         }
 
         if (file_exists(__DIR__ . '/../../public/' . $book['image'])) {
@@ -173,7 +165,6 @@ class BooksController extends BaseController
         $this->book->delete($id);
 
         $_SESSION['success'] = 'Book deleted successfully.';
-        header('Location: /admin/books');
-        exit;
+        $this->redirect('/admin/books');
     }
 }

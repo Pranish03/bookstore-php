@@ -51,16 +51,14 @@ class CartController extends BaseController
 
         if (! $book) {
             $_SESSION['error'] = 'Book not found.';
-            header('Location: /');
-            exit;
+            $this->redirect('/');
         }
 
         $cart = $this->resolveCart();
         $this->cartItem->addItem($cart['id'], $bookId);
 
         $_SESSION['success'] = "'{$book['title']}' added to cart.";
-        header('Location: /cart');
-        exit;
+        $this->redirect('/cart');
     }
 
     public function update()
@@ -77,8 +75,7 @@ class CartController extends BaseController
             $this->cartItem->updateQuantity($id, $quantity);
         }
 
-        header('Location: /cart');
-        exit;
+        $this->redirect('/cart');
     }
 
     public function remove()
@@ -91,7 +88,6 @@ class CartController extends BaseController
         $this->cartItem->removeItem($id, $cart['id']);
 
         $_SESSION['success'] = 'Item removed from cart.';
-        header('Location: /cart');
-        exit;
+        $this->redirect('/cart');
     }
 }

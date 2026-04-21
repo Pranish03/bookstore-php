@@ -41,8 +41,7 @@ class OrdersController extends BaseController
 
         if (! $order) {
             $_SESSION['error'] = 'Order not found.';
-            header('Location: /admin/orders');
-            exit;
+            $this->redirect('/admin/orders');
         }
 
         $this->view('admin.orders.show', compact('order'));
@@ -56,22 +55,19 @@ class OrdersController extends BaseController
 
         if (! $order) {
             $_SESSION['error'] = 'Order not found.';
-            header('Location: /admin/orders');
-            exit;
+            $this->redirect('/admin/orders');
         }
 
         $status = $_POST['status'] ?? '';
 
         if (! in_array($status, self::VALID_STATUSES)) {
             $_SESSION['error'] = 'Invalid status.';
-            header("Location: /admin/orders/{$id}");
-            exit;
+            $this->redirect("/admin/orders/{$id}");
         }
 
         $this->order->update($id, ['status' => $status]);
 
         $_SESSION['success'] = 'Order status updated.';
-        header("Location: /admin/orders/{$id}");
-        exit;
+        $this->redirect("/admin/orders/{$id}");
     }
 }

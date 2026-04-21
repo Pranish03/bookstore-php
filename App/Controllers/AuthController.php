@@ -28,8 +28,7 @@ class AuthController extends BaseController
         if (! $validator->validate($_POST, true)) {
             $_SESSION['errors']    = $validator->getErrors();
             $_SESSION['old_input'] = $_POST;
-            header('Location: /register');
-            exit;
+            $this->redirect('/register');
         }
 
         $data = $validator->validated();
@@ -37,8 +36,7 @@ class AuthController extends BaseController
         if ($this->user->emailExists($data['email'])) {
             $_SESSION['errors']    = ['email' => 'An account with that email already exists.'];
             $_SESSION['old_input'] = $_POST;
-            header('Location: /register');
-            exit;
+            $this->redirect('/register');
         }
 
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
@@ -46,8 +44,7 @@ class AuthController extends BaseController
         if (! $this->user->create($data)) {
             $_SESSION['errors']    = ['general' => 'Registration failed. Please try again.'];
             $_SESSION['old_input'] = $_POST;
-            header('Location: /register');
-            exit;
+            $this->redirect('/register');
         }
 
         $sessionUser = $this->user->findByEmail($data['email']);
@@ -59,8 +56,7 @@ class AuthController extends BaseController
 
         $this->cart->mergeSessionCartIntoUser(session_id(), $sessionUser['id']);
 
-        header('Location: /');
-        exit;
+        $this->redirect('/');
     }
 
     public function login()
@@ -72,8 +68,7 @@ class AuthController extends BaseController
         if (! $validator->validate($_POST)) {
             $_SESSION['errors']    = $validator->getErrors();
             $_SESSION['old_input'] = $_POST;
-            header('Location: /login');
-            exit;
+            $this->redirect('/login');
         }
 
         $data = $validator->validated();
@@ -82,8 +77,7 @@ class AuthController extends BaseController
         if (! $user || ! password_verify($data['password'], $user['password'])) {
             $_SESSION['errors']    = ['general' => 'Invalid email or password.'];
             $_SESSION['old_input'] = $_POST;
-            header('Location: /login');
-            exit;
+            $this->redirect('/login');
         }
 
         session_regenerate_id(true);
@@ -95,8 +89,7 @@ class AuthController extends BaseController
 
         $this->cart->mergeSessionCartIntoUser(session_id(), $user['id']);
 
-        header('Location: /');
-        exit;
+        $this->redirect('/');
     }
 
     public function logout()
@@ -120,7 +113,6 @@ class AuthController extends BaseController
 
         session_destroy();
 
-        header('Location: /');
-        exit;
+        $this->redirect('/');
     }
 }

@@ -32,8 +32,7 @@ class UsersController extends BaseController
 
         if (! $user) {
             $_SESSION['error'] = 'User not found.';
-            header('Location: /admin/users');
-            exit;
+            $this->redirect('/admin/users');
         }
 
         $this->view('admin.users.show', compact('user'));
@@ -45,23 +44,20 @@ class UsersController extends BaseController
 
         if ((int) $id === (int) $_SESSION['user']['id']) {
             $_SESSION['error'] = 'You cannot change your own admin status.';
-            header("Location: /admin/users/{$id}");
-            exit;
+            $this->redirect("/admin/users/{$id}");
         }
 
         $user = $this->user->find($id);
 
         if (! $user) {
             $_SESSION['error'] = 'User not found.';
-            header('Location: /admin/users');
-            exit;
+            $this->redirect('/admin/users');
         }
 
         $this->user->update($id, ['is_admin' => $user['is_admin'] ? 0 : 1]);
 
         $_SESSION['success'] = 'User admin status updated.';
-        header("Location: /admin/users/{$id}");
-        exit;
+        $this->redirect("/admin/users/{$id}");
     }
 
     public function destroy($id)
@@ -70,22 +66,19 @@ class UsersController extends BaseController
 
         if ((int) $id === (int) $_SESSION['user']['id']) {
             $_SESSION['error'] = 'You cannot delete your own account.';
-            header("Location: /admin/users/{$id}");
-            exit;
+            $this->redirect("/admin/users/{$id}");
         }
 
         $user = $this->user->find($id);
 
         if (! $user) {
             $_SESSION['error'] = 'User not found.';
-            header('Location: /admin/users');
-            exit;
+            $this->redirect('/admin/users');
         }
 
         $this->user->delete($id);
 
         $_SESSION['success'] = 'User deleted successfully.';
-        header('Location: /admin/users');
-        exit;
+        $this->redirect('/admin/users');
     }
 }
