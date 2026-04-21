@@ -30,6 +30,19 @@ class PageController extends BaseController
         $this->view('page.book', ['book' => $book]);
     }
 
+    public function search()
+    {
+        $query = trim($_GET['q'] ?? '');
+
+        if (empty($query)) {
+            header('Location: /');
+            exit;
+        }
+
+        $books = $this->book->search($query);
+        $this->view('page.search', compact('books', 'query'));
+    }
+
     public function register()
     {
         (new GuestMiddleware())->handle();

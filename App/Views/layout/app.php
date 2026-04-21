@@ -9,13 +9,19 @@
 
 <body>
     <header>
-        <h1>Bookstore</h1>
+        <h1>
+            <a href="/">Bookstore</a>
+        </h1>
+
+        <form action="/search" method="get">
+            <input type="text" name="q" placeholder="Search books by title, author or isbn" required />
+            <button type="submit">Search</button>
+        </form>
+
         <nav>
             <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/admin">Admin</a></li>
-
                 <?php if (isset($_SESSION['user'])): ?>
+                    <li><a href="/orders">Orders</a></li>
                     <li><a href="/cart">Cart (<?= $cartCount ?>)</a></li>
                     <li>
                         <form action="/logout" method="post">
