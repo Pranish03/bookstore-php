@@ -54,7 +54,7 @@ class BooksController extends BaseController
         $validator = new BookValidator();
 
         if (! $validator->validate($_POST, $_FILES, true)) {
-            $_SESSION['errors']   = $validator->errors();
+            $_SESSION['errors']    = $validator->errors();
             $_SESSION['old_input'] = $_POST;
             header('Location: /admin/books/create');
             exit;
@@ -72,7 +72,7 @@ class BooksController extends BaseController
         }
 
         if (! move_uploaded_file($image['tmp_name'], $uploadPath)) {
-            $_SESSION['errors'] = ['image' => 'Failed to upload image.'];
+            $_SESSION['errors']    = ['image' => 'Failed to upload image.'];
             $_SESSION['old_input'] = $_POST;
             header('Location: /admin/books/create');
             exit;
@@ -116,7 +116,7 @@ class BooksController extends BaseController
         $validator = new BookValidator();
 
         if (! $validator->validate($_POST, $_FILES, false)) {
-            $_SESSION['errors']   = $validator->errors();
+            $_SESSION['errors']    = $validator->errors();
             $_SESSION['old_input'] = $_POST;
             header("Location: /admin/books/{$id}/edit");
             exit;
@@ -140,7 +140,7 @@ class BooksController extends BaseController
                 }
                 $data['image'] = 'uploads/books/' . $filename;
             } else {
-                $_SESSION['errors'] = ['image' => 'Failed to upload image.'];
+                $_SESSION['errors']    = ['image' => 'Failed to upload image.'];
                 $_SESSION['old_input'] = $_POST;
                 header("Location: /admin/books/{$id}/edit");
                 exit;
