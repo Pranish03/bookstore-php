@@ -4,6 +4,7 @@ use App\Controllers\PageController;
 use App\Controllers\AuthController;
 use App\Controllers\CartController;
 use App\Controllers\CheckoutController;
+use App\Controllers\UsersController;
 use App\Controllers\BooksController;
 use App\Controllers\OrdersController;
 
@@ -12,6 +13,7 @@ $pageController  = new PageController();
 $authController  = new AuthController();
 $cartController = new CartController();
 $checkoutController = new CheckoutController();
+$usersController = new UsersController();
 $booksController = new BooksController();
 $ordersController = new OrdersController();
 
@@ -35,6 +37,11 @@ $router->map('POST', '/checkout', [$checkoutController, 'store']);
 $router->map('GET', '/orders', [$checkoutController, 'history']);
 $router->map('GET', '/orders/[i:id]', [$checkoutController, 'show']);
 $router->map('POST', '/orders/[i:id]/cancel', [$checkoutController, 'cancel']);
+
+$router->map('GET', '/admin/users', [$usersController, 'index']);
+$router->map('GET', '/admin/users/[i:id]', [$usersController, 'show']);
+$router->map('POST', '/admin/users/[i:id]/toggle-admin', [$usersController, 'toggleAdmin']);
+$router->map('DELETE', '/admin/users/[i:id]', [$usersController, 'destroy']);
 
 $router->map('GET', '/admin/books', [$booksController, 'index']);
 $router->map('GET', '/admin/books/create', [$booksController, 'create']);

@@ -23,4 +23,24 @@ class User extends Model
         $stmt->execute([$email]);
         return (int) $stmt->fetchColumn() > 0;
     }
+
+    public function search(string $query): array
+    {
+        $like = '%' . $query . '%';
+        $stmt = self::getConnection()->prepare("
+        SELECT * FROM {$this->table}
+        WHERE name LIKE ? OR email LIKE ?
+        ORDER BY created_at DESC
+    ");
+        $stmt->execute([$like, $like]);
+        return $stmt->fetchAll();
+    }
+
+    public function allOrdered(): array
+    {
+        $stmt = self::getConnection()->query(
+            "SELECT * FROM {$this->table} ORDER BY created_at DESC"
+        );
+        return $stmt->fetchAll();
+    }
 }
