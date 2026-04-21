@@ -6,7 +6,7 @@ class GuestMiddleware
 {
     public function handle(): void
     {
-        if (isset($_SESSION['user_id'])) {
+        if (isset($_SESSION['user'])) {
             header('Location: /');
             exit();
         }

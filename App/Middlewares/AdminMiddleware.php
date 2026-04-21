@@ -2,19 +2,24 @@
 
 namespace App\Middlewares;
 
+use App\Models\User;
+
 class AdminMiddleware
 {
     public function handle(): void
     {
-        if (! isset($_SESSION['user'])) {
-            $_SESSION['errors'] = ['general' => 'You must be logged in to access that page.'];
+        if (!isset($_SESSION['user'])) {
             header('Location: /login');
             exit;
         }
 
-        if (($_SESSION['user']['role'] ?? '') !== 'admin') {
+        $user = (new User())->find($_SESSION['user']['id']);
+
+        if (!$user || empty($user['is_admin'])) {
             header('Location: /');
             exit;
         }
+
+        $_SESSION['user']['is_admin'] = $user['is_admin'];
     }
 }
