@@ -75,4 +75,12 @@ class CartItem extends Model
         $stmt->execute([$cartId]);
         return (int) $stmt->fetchColumn();
     }
+
+    public function clearCart(int $cartId): bool
+    {
+        $stmt = self::getConnection()->prepare(
+            "DELETE FROM {$this->table} WHERE cart_id = ?"
+        );
+        return $stmt->execute([$cartId]);
+    }
 }
