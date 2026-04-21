@@ -17,18 +17,37 @@ class Order extends Model
 
     public function getWithItems(int $orderId): array|false
     {
-        $order = $this->find($orderId);
+        $stmt = self::getConnection()->prepare("
+        SELECT orders.*, users.name AS customer_name, users.email AS customer_email
+        FROM orders
+        JOIN users ON orders.user_id = users.id
+        WHERE orders.id = ?
+    ");
+        $stmt->execute([$orderId]);
+        $order = $stmt->fetch();
+
         if (! $order) return false;
 
         $stmt = self::getConnection()->prepare("
-            SELECT order_items.*, books.title, books.image, books.author
-            FROM order_items
-            JOIN books ON order_items.book_id = books.id
-            WHERE order_items.order_id = ?
-        ");
+        SELECT order_items.*, books.title, books.image, books.author
+        FROM order_items
+        JOIN books ON order_items.book_id = books.id
+        WHERE order_items.order_id = ?
+    ");
         $stmt->execute([$orderId]);
         $order['items'] = $stmt->fetchAll();
 
         return $order;
+    }
+
+    public function allWithUsers(): array
+    {
+        $stmt = self::getConnection()->query("
+        SELECT orders.*, users.name AS customer_name, users.email AS customer_email
+        FROM orders
+        JOIN users ON orders.user_id = users.id
+        ORDER BY orders.created_at DESC
+    ");
+        return $stmt->fetchAll();
     }
 }

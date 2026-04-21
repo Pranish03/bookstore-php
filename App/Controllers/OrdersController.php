@@ -1,0 +1,75 @@
+<?php
+
+namespace App\Controllers;
+
+use App\Controllers\BaseController;
+use App\Middlewares\AdminMiddleware;
+use App\Models\Order;
+
+class OrdersController extends BaseController
+{
+    private Order $order;
+
+    private const VALID_STATUSES = [
+        'pending',
+        'processing',
+        'shipped',
+        'delivered',
+        'cancelled'
+    ];
+
+    public function __construct()
+    {
+        $this->order = new Order();
+    }
+
+    public function index()
+    {
+        (new AdminMiddleware())->handle();
+
+        $orders = $this->order->allWithUsers();
+        $this->view('admin.orders.index', compact('orders'));
+    }
+
+    public function show($id)
+    {
+        (new AdminMiddleware())->handle();
+
+        $order = $this->order->getWithItems($id);
+
+        if (! $order) {
+            $_SESSION['error'] = 'Order not found.';
+            header('Location: /admin/orders');
+            exit;
+        }
+
+        $this->view('admin.orders.show', compact('order'));
+    }
+
+    public function updateStatus($id)
+    {
+        (new AdminMiddleware())->handle();
+
+        $order = $this->order->find($id);
+
+        if (! $order) {
+            $_SESSION['error'] = 'Order not found.';
+            header('Location: /admin/orders');
+            exit;
+        }
+
+        $status = $_POST['status'] ?? '';
+
+        if (! in_array($status, self::VALID_STATUSES)) {
+            $_SESSION['error'] = 'Invalid status.';
+            header("Location: /admin/orders/{$id}");
+            exit;
+        }
+
+        $this->order->update($id, ['status' => $status]);
+
+        $_SESSION['success'] = 'Order status updated.';
+        header("Location: /admin/orders/{$id}");
+        exit;
+    }
+}

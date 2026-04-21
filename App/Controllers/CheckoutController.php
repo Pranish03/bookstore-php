@@ -93,7 +93,6 @@ class CheckoutController extends BaseController
             ]);
         }
 
-        // Clear the cart
         $this->cartItem->clearCart($cart['id']);
 
         $_SESSION['success'] = 'Order placed successfully!';

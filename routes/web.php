@@ -5,6 +5,7 @@ use App\Controllers\AuthController;
 use App\Controllers\CartController;
 use App\Controllers\CheckoutController;
 use App\Controllers\BooksController;
+use App\Controllers\OrdersController;
 
 
 $pageController  = new PageController();
@@ -12,6 +13,7 @@ $authController  = new AuthController();
 $cartController = new CartController();
 $checkoutController = new CheckoutController();
 $booksController = new BooksController();
+$ordersController = new OrdersController();
 
 $router->map('GET', '/', [$pageController,  'home']);
 $router->map('GET', '/book/[i:id]', [$pageController,  'book']);
@@ -39,3 +41,7 @@ $router->map('POST', '/admin/books', [$booksController, 'store']);
 $router->map('GET', '/admin/books/[i:id]/edit', [$booksController, 'edit']);
 $router->map('PUT', '/admin/books/[i:id]', [$booksController, 'update']);
 $router->map('DELETE', '/admin/books/[i:id]', [$booksController, 'destroy']);
+
+$router->map('GET',  '/admin/orders',                   [$ordersController, 'index']);
+$router->map('GET',  '/admin/orders/[i:id]',            [$ordersController, 'show']);
+$router->map('POST', '/admin/orders/[i:id]/status',     [$ordersController, 'updateStatus']);
