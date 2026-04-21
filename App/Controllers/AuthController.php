@@ -111,7 +111,7 @@ class AuthController extends BaseController
 
         session_destroy();
 
-        header('Location: /login');
+        header('Location: /');
         exit;
     }
 }
