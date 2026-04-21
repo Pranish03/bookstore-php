@@ -1,0 +1,26 @@
+CREATE DATABASE IF NOT EXISTS bookstore_db;
+
+USE bookstore_db;
+
+CREATE TABLE IF NOT EXISTS carts (
+    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id     INT UNSIGNED NULL,
+    session_id  VARCHAR(255) NULL,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_session (session_id),
+    INDEX idx_user (user_id)
+);
+
+CREATE TABLE IF NOT EXISTS cart_items (
+    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    cart_id     INT UNSIGNED NOT NULL,
+    book_id     INT UNSIGNED NOT NULL,
+    quantity    INT UNSIGNED NOT NULL DEFAULT 1,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (cart_id) REFERENCES carts(id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+    UNIQUE KEY uk_cart_book (cart_id, book_id)
+);
