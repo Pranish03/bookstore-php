@@ -43,4 +43,14 @@ class User extends Model
         );
         return $stmt->fetchAll();
     }
+
+    public function getRecent(int $limit = 5): array
+    {
+        $stmt = self::getConnection()->prepare(
+            "SELECT id, name, email, created_at FROM {$this->table}
+         ORDER BY created_at DESC LIMIT ?"
+        );
+        $stmt->execute([$limit]);
+        return $stmt->fetchAll();
+    }
 }

@@ -68,4 +68,35 @@ class Order extends Model
         $stmt->execute([$like, $like, $like, $like]);
         return $stmt->fetchAll();
     }
+
+    public function getTotalRevenue(): float
+    {
+        $stmt = self::getConnection()->query(
+            "SELECT SUM(total) FROM {$this->table} WHERE status = 'delivered'"
+        );
+        return (float) $stmt->fetchColumn();
+    }
+
+    public function getRecent(int $limit = 5): array
+    {
+        $stmt = self::getConnection()->prepare("
+        SELECT orders.*, users.name AS customer_name
+        FROM orders
+        JOIN users ON orders.user_id = users.id
+        ORDER BY orders.created_at DESC
+        LIMIT ?
+    ");
+        $stmt->execute([$limit]);
+        return $stmt->fetchAll();
+    }
+
+    public function getCountByStatus(): array
+    {
+        $stmt = self::getConnection()->query("
+        SELECT status, COUNT(*) as count
+        FROM {$this->table}
+        GROUP BY status
+    ");
+        return $stmt->fetchAll();
+    }
 }

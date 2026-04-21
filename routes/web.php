@@ -22,6 +22,7 @@ $ordersController   = new OrdersController();
 $router->map('GET', '/',            [$pageController, 'home']);
 $router->map('GET', '/book/[i:id]', [$pageController, 'book']);
 $router->map('GET', '/search',      [$pageController, 'search']);
+$router->map('GET', '/admin',       [$pageController, 'dashboard']);
 $router->map('GET', '/register',    [$pageController, 'register']);
 $router->map('GET', '/login',       [$pageController, 'login']);
 
