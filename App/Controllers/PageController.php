@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Middlewares\GuestMiddleware;
 use App\Models\Book;
 
 class PageController extends BaseController
@@ -31,11 +32,15 @@ class PageController extends BaseController
 
     public function register()
     {
+        (new GuestMiddleware())->handle();
+
         $this->view('page.register');
     }
 
     public function login()
     {
+        (new GuestMiddleware())->handle();
+
         $this->view('page.login');
     }
 

@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\User;
+use App\Middlewares\GuestMiddleware;
+use App\Middlewares\AuthMiddleware;
 use App\Validation\AuthValidator;
 
 class AuthController extends BaseController
@@ -16,6 +18,8 @@ class AuthController extends BaseController
 
     public function register()
     {
+        (new GuestMiddleware())->handle();
+
         $validator = new AuthValidator();
 
         if (! $validator->validate($_POST, true)) {
@@ -55,6 +59,8 @@ class AuthController extends BaseController
 
     public function login()
     {
+        (new GuestMiddleware())->handle();
+
         $validator = new AuthValidator();
 
         if (! $validator->validate($_POST)) {
@@ -86,6 +92,8 @@ class AuthController extends BaseController
 
     public function logout()
     {
+        (new AuthMiddleware())->handle();
+
         $_SESSION = [];
 
         if (ini_get('session.use_cookies')) {

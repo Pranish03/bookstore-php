@@ -21,10 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['_method'])) {
 $match = $router->match();
 
 if ($match && is_callable($match['target'])) {
-    $name = $match['name'] ?? null;
-    if ($name && isset($name['middleware'])) {
-        (new $name['middleware']())->handle();
-    }
     call_user_func_array($match['target'], $match['params']);
 } else {
     http_response_code(404);

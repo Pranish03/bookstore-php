@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Middlewares\AdminMiddleware;
 use App\Models\Book;
 use App\Validation\BookValidator;
 
@@ -16,12 +17,16 @@ class BooksController extends BaseController
 
     public function index()
     {
+        (new AdminMiddleware())->handle();
+
         $books = $this->book->all();
         $this->view('admin.books.index', ['books' => $books]);
     }
 
     public function show($id)
     {
+        (new AdminMiddleware())->handle();
+
         $book = $this->book->find($id);
 
         if (! $book) {
@@ -35,11 +40,15 @@ class BooksController extends BaseController
 
     public function create()
     {
+        (new AdminMiddleware())->handle();
+
         $this->view('admin.books.create');
     }
 
     public function store()
     {
+        (new AdminMiddleware())->handle();
+
         $validator = new BookValidator();
 
         if (! $validator->validate($_POST, $_FILES, true)) {
@@ -78,6 +87,8 @@ class BooksController extends BaseController
 
     public function edit($id)
     {
+        (new AdminMiddleware())->handle();
+
         $book = $this->book->find($id);
 
         if (! $book) {
@@ -90,6 +101,8 @@ class BooksController extends BaseController
     }
     public function update($id)
     {
+        (new AdminMiddleware())->handle();
+
         $book = $this->book->find($id);
 
         if (! $book) {
@@ -141,6 +154,8 @@ class BooksController extends BaseController
 
     public function destroy($id)
     {
+        (new AdminMiddleware())->handle();
+
         $book = $this->book->find($id);
 
         if (! $book) {
