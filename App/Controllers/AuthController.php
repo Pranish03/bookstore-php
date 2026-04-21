@@ -55,11 +55,55 @@ class AuthController extends BaseController
 
     public function login()
     {
-        // Logic for handling user login
+        $validator = new AuthValidator();
+
+        if (! $validator->validate($_POST)) {
+            $_SESSION['errors']    = $validator->getErrors();
+            $_SESSION['old_input'] = $_POST;
+            header('Location: /login');
+            exit;
+        }
+
+        $data = $validator->validated();
+        $user = $this->user->findByEmail($data['email']);
+
+        if (! $user || ! password_verify($data['password'], $user['password'])) {
+            $_SESSION['errors']    = ['general' => 'Invalid email or password.'];
+            $_SESSION['old_input'] = $_POST;
+            header('Location: /login');
+            exit;
+        }
+
+        session_regenerate_id(true);
+
+        unset($user['password']);
+
+        $_SESSION['user']    = $user;
+        $_SESSION['success'] = 'Welcome back, ' . $user['name'] . '!';
+        header('Location: /');
+        exit;
     }
 
     public function logout()
     {
-        // Logic for handling user logout
+        $_SESSION = [];
+
+        if (ini_get('session.use_cookies')) {
+            $params = session_get_cookie_params();
+            setcookie(
+                session_name(),
+                '',
+                time() - 42000,
+                $params['path'],
+                $params['domain'],
+                $params['secure'],
+                $params['httponly']
+            );
+        }
+
+        session_destroy();
+
+        header('Location: /login');
+        exit;
     }
 }
