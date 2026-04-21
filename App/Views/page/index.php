@@ -7,7 +7,9 @@ start_layout();
     <h1>Books</h1>
     <ul>
         <?php foreach ($books as $book): ?>
-            <li><strong><?= htmlspecialchars($book['title']) ?></strong> by <?= htmlspecialchars($book['author']) ?></li>
+            <a href="/book/<?= $book['id'] ?>">
+                <?php include __DIR__ . '/../components/BookCard.php'; ?>
+            </a>
         <?php endforeach; ?>
     </ul>
 

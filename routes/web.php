@@ -6,7 +6,8 @@ use App\Controllers\BooksController;
 $pageController = new PageController();
 $booksController = new BooksController();
 
-$router->map('GET', '/', [$pageController, 'home']);
+$router->map('GET', '/', [$pageController, 'index']);
+$router->map('GET', '/book/[i:id]', [$pageController, 'show']);
 
 $router->map('GET', '/admin/books', [$booksController, 'index']);
 $router->map('GET', '/admin/books/[i:id]', [$booksController, 'show']);
