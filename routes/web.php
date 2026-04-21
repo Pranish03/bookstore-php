@@ -33,6 +33,7 @@ $router->map('GET',  '/checkout',      [$checkoutController, 'index']);
 $router->map('POST', '/checkout',      [$checkoutController, 'store']);
 $router->map('GET',  '/orders',        [$checkoutController, 'history']);
 $router->map('GET',  '/orders/[i:id]', [$checkoutController, 'show']);
+$router->map('POST', '/orders/[i:id]/cancel', [$checkoutController, 'cancel']);
 
 $router->map('GET', '/admin/books', [$booksController, 'index']);
 $router->map('GET', '/admin/books/create', [$booksController, 'create']);

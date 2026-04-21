@@ -26,7 +26,15 @@ start_layout();
                         <td>Rs. <?= number_format($order['total'], 2) ?></td>
                         <td><?= ucfirst($order['status']) ?></td>
                         <td><?= date('M d, Y', strtotime($order['created_at'])) ?></td>
-                        <td><a href="/orders/<?= $order['id'] ?>">View</a></td>
+                        <td>
+                            <a href="/orders/<?= $order['id'] ?>">View</a>
+                            <?php if ($order['status'] === 'pending'): ?>
+                                <form action="/orders/<?= $order['id'] ?>/cancel" method="POST" style="display:inline"
+                                    onsubmit="return confirm('Cancel this order?')">
+                                    <button type="submit">Cancel</button>
+                                </form>
+                            <?php endif; ?>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

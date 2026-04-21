@@ -12,6 +12,18 @@ start_layout();
     <?php endif; ?>
 
     <p>Order #<?= $order['id'] ?> — Status: <strong><?= ucfirst($order['status']) ?></strong></p>
+    <?php if ($order['status'] === 'pending'): ?>
+        <form action="/orders/<?= $order['id'] ?>/cancel" method="POST"
+            onsubmit="return confirm('Are you sure you want to cancel this order?')">
+            <button type="submit">Cancel Order</button>
+        </form>
+    <?php endif; ?>
+
+    <?php if (!empty($_SESSION['error'])): ?>
+        <p style="color:red"><?= htmlspecialchars($_SESSION['error']) ?></p>
+        <?php unset($_SESSION['error']); ?>
+    <?php endif; ?>
+
     <p>Delivering to: <?= htmlspecialchars($order['address']) ?></p>
 
     <table>

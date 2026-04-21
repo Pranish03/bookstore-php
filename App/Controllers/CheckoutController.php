@@ -121,4 +121,27 @@ class CheckoutController extends BaseController
         $orders = $this->order->getByUser($_SESSION['user']['id']);
         $this->view('page.orders', compact('orders'));
     }
+
+    public function cancel($id)
+    {
+        (new AuthMiddleware())->handle();
+
+        $order = $this->order->find($id);
+        if (! $order || $order['user_id'] !== $_SESSION['user']['id']) {
+            $this->view('errors.404');
+            return;
+        }
+
+        if ($order['status'] !== 'pending') {
+            $_SESSION['error'] = 'Only pending orders can be cancelled.';
+            header("Location: /orders/{$id}");
+            exit;
+        }
+
+        $this->order->update($id, ['status' => 'cancelled']);
+
+        $_SESSION['success'] = 'Order cancelled successfully.';
+        header("Location: /orders/{$id}");
+        exit;
+    }
 }
