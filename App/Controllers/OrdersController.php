@@ -27,8 +27,10 @@ class OrdersController extends BaseController
     {
         (new AdminMiddleware())->handle();
 
-        $orders = $this->order->allWithUsers();
-        $this->view('admin.orders.index', compact('orders'));
+        $query  = trim($_GET['q'] ?? '');
+        $orders = $query ? $this->order->search($query) : $this->order->allWithUsers();
+
+        $this->view('admin.orders.index', compact('orders', 'query'));
     }
 
     public function show($id)

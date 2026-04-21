@@ -19,8 +19,10 @@ class BooksController extends BaseController
     {
         (new AdminMiddleware())->handle();
 
-        $books = $this->book->all();
-        $this->view('admin.books.index', ['books' => $books]);
+        $query = trim($_GET['q'] ?? '');
+        $books = $query ? $this->book->search($query) : $this->book->all();
+
+        $this->view('admin.books.index', compact('books', 'query'));
     }
 
     public function show($id)

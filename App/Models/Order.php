@@ -50,4 +50,22 @@ class Order extends Model
     ");
         return $stmt->fetchAll();
     }
+
+    public function search(string $query): array
+    {
+        $like = '%' . $query . '%';
+
+        $stmt = self::getConnection()->prepare("
+        SELECT orders.*, users.name AS customer_name, users.email AS customer_email
+        FROM orders
+        JOIN users ON orders.user_id = users.id
+        WHERE users.name LIKE ?
+           OR users.email LIKE ?
+           OR orders.status LIKE ?
+           OR orders.id LIKE ?
+        ORDER BY orders.created_at DESC
+    ");
+        $stmt->execute([$like, $like, $like, $like]);
+        return $stmt->fetchAll();
+    }
 }
