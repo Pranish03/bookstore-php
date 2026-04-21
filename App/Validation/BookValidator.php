@@ -10,6 +10,7 @@ class BookValidator
     public function validate(array $post, array $files, bool $requireImage = true): bool
     {
         $this->errors = [];
+        $this->data = [];
 
         if (empty(trim($post['title'] ?? ''))) {
             $this->errors['title'] = 'Title is required.';
