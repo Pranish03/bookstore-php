@@ -1,0 +1,12 @@
+USE bookstore_db;
+
+CREATE TABLE IF NOT EXISTS users (
+    id          INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name        VARCHAR(255)    NOT NULL,
+    email       VARCHAR(255)    NOT NULL,
+    password    VARCHAR(255)    NOT NULL,
+    is_admin    BOOLEAN         DEFAULT 0,
+    profile     VARCHAR(255)    NULL,
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
