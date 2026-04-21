@@ -17,7 +17,8 @@ start_layout();
                 <th>SN</th>
                 <th>Title</th>
                 <th>Author</th>
-                <th>Price</th>
+                <th>Original Price</th>
+                <th>Discount Price</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -32,7 +33,8 @@ start_layout();
                         </a>
                     </td>
                     <td><?= $book['author'] ?></td>
-                    <td><?= $book['price'] ?></td>
+                    <td>Rs. <?= number_format($book['price'], 2) ?></td>
+                    <td>Rs. <?= number_format($book['price'] - ($book['price'] * $book['discount'] / 100), 2) ?></td>
                     <td>
                         <a href="/admin/books/<?= $book['id'] ?>/edit">Edit</a>
                         <form method="POST" action="/admin/books/<?= $book['id'] ?>" style="display: inline;">

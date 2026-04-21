@@ -27,6 +27,14 @@ class BookValidator
             $this->errors['price'] = 'Price must be a positive number.';
         }
 
+        if (isset($post['discount']) && $post['discount'] !== '') {
+            if (!is_numeric($post['discount'])) {
+                $this->errors['discount'] = 'Discount must be a number.';
+            } elseif ($post['discount'] < 0 || $post['discount'] > 100) {
+                $this->errors['discount'] = 'Discount must be between 0.00 and 100.00.';
+            }
+        }
+
         if (empty(trim($post['description'] ?? ''))) {
             $this->errors['description'] = 'Description is required.';
         }
@@ -75,6 +83,7 @@ class BookValidator
                 'title'        => trim($post['title']),
                 'author'       => trim($post['author']),
                 'price'        => (float) $post['price'],
+                'discount'     => isset($post['discount']) && $post['discount'] !== '' ? (float) $post['discount'] : 0.00,
                 'description'  => trim($post['description']),
                 'isbn'         => trim($post['isbn']),
                 'published_on' => $post['published_on'],

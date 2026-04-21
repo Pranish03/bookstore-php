@@ -61,6 +61,15 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
         </div>
 
         <div>
+            <label for="discount">Discount:</label>
+            <input type="number" id="discount" name="discount" step="0.01"
+                value="<?= htmlspecialchars($old['discount'] ?? $book['discount']) ?>" required>
+            <?php if (!empty($errors['discount'])): ?>
+                <span class="error"><?= htmlspecialchars($errors['discount']) ?></span>
+            <?php endif; ?>
+        </div>
+
+        <div>
             <label for="description">Description:</label>
             <textarea id="description" name="description" required><?= htmlspecialchars($old['description'] ?? $book['description']) ?></textarea>
             <?php if (!empty($errors['description'])): ?>
