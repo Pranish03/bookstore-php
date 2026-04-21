@@ -16,7 +16,7 @@
                 <li><a href="/admin">Admin</a></li>
 
                 <?php if (isset($_SESSION['user'])): ?>
-                    <li><?= htmlspecialchars($_SESSION['user']['name']) ?></li>
+                    <li><a href="/cart">Cart (<?= $cartCount ?>)</a></li>
                     <li>
                         <form action="/logout" method="post">
                             <button type="submit">Logout</button>

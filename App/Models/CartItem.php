@@ -66,4 +66,13 @@ class CartItem extends Model
             return $carry + ($discounted * $item['quantity']);
         }, 0.0);
     }
+
+    public function getItemCount(int $cartId): int
+    {
+        $stmt = self::getConnection()->prepare(
+            "SELECT SUM(quantity) FROM {$this->table} WHERE cart_id = ?"
+        );
+        $stmt->execute([$cartId]);
+        return (int) $stmt->fetchColumn();
+    }
 }

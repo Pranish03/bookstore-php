@@ -2,6 +2,7 @@
 
 namespace App\Controllers;
 
+use App\Middlewares\AuthMiddleware;
 use App\Models\Book;
 use App\Models\Cart;
 use App\Models\CartItem;
@@ -21,6 +22,8 @@ class CartController extends BaseController
 
     private function resolveCart(): array
     {
+        (new AuthMiddleware())->handle();
+
         if (isset($_SESSION['user'])) {
             return $this->cart->getOrCreateForUser($_SESSION['user']['id']);
         }
@@ -30,6 +33,8 @@ class CartController extends BaseController
 
     public function index()
     {
+        (new AuthMiddleware())->handle();
+
         $cart  = $this->resolveCart();
         $items = $this->cartItem->getByCart($cart['id']);
         $total = $this->cartItem->getTotal($cart['id']);
@@ -39,6 +44,8 @@ class CartController extends BaseController
 
     public function add()
     {
+        (new AuthMiddleware())->handle();
+
         $bookId = (int) ($_POST['book_id'] ?? 0);
         $book   = $this->book->find($bookId);
 
@@ -58,6 +65,8 @@ class CartController extends BaseController
 
     public function update()
     {
+        (new AuthMiddleware())->handle();
+
         $cart     = $this->resolveCart();
         $id       = (int) ($_POST['cart_item_id'] ?? 0);
         $quantity = (int) ($_POST['quantity'] ?? 1);
@@ -74,6 +83,8 @@ class CartController extends BaseController
 
     public function remove()
     {
+        (new AuthMiddleware())->handle();
+
         $cart = $this->resolveCart();
         $id   = (int) ($_POST['cart_item_id'] ?? 0);
 
