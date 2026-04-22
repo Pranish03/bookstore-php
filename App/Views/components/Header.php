@@ -1,4 +1,4 @@
-<header class="py-1">
+<header>
     <div class="max-w-300 mx-auto flex items-center justify-between py-4 px-6">
         <h1 class="font-serif text-3xl font-bold">
             <a href=" /">Bookstore</a>
