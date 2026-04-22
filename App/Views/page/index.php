@@ -62,7 +62,7 @@
             <div class="books-grid">
                 <?php foreach ($books as $book): ?>
                     <a href="/book/<?= $book['id'] ?>" class="book-card-link">
-                        <?php include __DIR__ . '/../components/BookCard.php'; ?>
+                        <?= component('BookCard', compact('book')); ?>
                     </a>
                 <?php endforeach; ?>
             </div>

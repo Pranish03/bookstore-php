@@ -1,7 +1,6 @@
-<?php
-require __DIR__ . '/../../layout_helper.php';
-start_layout();
+<?= start_layout(); ?>
 
+<?php
 $errors = $_SESSION['errors']    ?? [];
 $old    = $_SESSION['old_input'] ?? [];
 
@@ -117,4 +116,4 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
     </form>
 </div>
 
-<?php end_layout('admin'); ?>
+<?= end_layout('admin'); ?>

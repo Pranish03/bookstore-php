@@ -1,7 +1,4 @@
-<?php
-require __DIR__ . '/../../layout_helper.php';
-start_layout();
-?>
+<?= start_layout(); ?>
 
 <div>
     <h1>Orders</h1>
@@ -61,4 +58,4 @@ start_layout();
     </table>
 </div>
 
-<?php end_layout('admin'); ?>
+<?= end_layout('admin'); ?>

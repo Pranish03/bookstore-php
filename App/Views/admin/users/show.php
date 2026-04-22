@@ -1,10 +1,7 @@
-<?php
-require __DIR__ . '/../../layout_helper.php';
-start_layout();
-?>
+<?= start_layout(); ?>
 
 <div>
-    <a href="/admin/users">← Back to users</a>
+    <a href="/admin/users">Back to users</a>
 
     <h1><?= htmlspecialchars($user['name']) ?></h1>
 
@@ -39,4 +36,4 @@ start_layout();
     <?php endif; ?>
 </div>
 
-<?php end_layout('admin'); ?>
+<?= end_layout('admin'); ?>
