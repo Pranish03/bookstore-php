@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 
+:root {
+  --radius: 8px;
+  --border: #e4e4e7;
+  --muted: #71717a;
+  --muted-bg: #f4f4f5;
+  --foreground: #09090b;
+  --card-bg: #ffffff;
+  --accent: #18181b;
+  --accent-hover: #3f3f46;
+  --primary-fg: #fafafa;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -22,6 +34,7 @@ body {
   text-decoration: none;
   color: black;
   font-size: 32px;
+  font-family: "Georgia", "Times New Roman", serif;
 }
 
 .header .search {

@@ -1,0 +1,29 @@
+{
+  "name": "bookstore-php",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "npx concurrently --names \"PHP,CSS\" --prefix-colors \"bgBlue.bold,bgMagenta.bold\" \"php -S localhost:8000 -t public\" \"npx @tailwindcss/cli -i ./App/Views/global.css -o ./public/assets/css/style.css --watch\"",
+    "build": "npx @tailwindcss/cli -i ./App/Views/global.css -o ./public/assets/css/style.css --minify"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pranish03/bookstore-php.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Pranish03/bookstore-php/issues"
+  },
+  "homepage": "https://github.com/Pranish03/bookstore-php#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.2.4",
+    "tailwindcss": "^4.2.4"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
