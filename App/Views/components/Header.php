@@ -1,6 +1,6 @@
 <header>
     <div class="max-w-300 mx-auto flex items-center justify-between py-4 px-6">
-        <h1 class="font-serif text-3xl font-bold">
+        <h1 class="font-serif text-[32px] font-bold">
             <a href=" /">Bookstore</a>
         </h1>
 
@@ -8,7 +8,7 @@
             <span class="absolute left-2.5 text-zinc-500">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </span>
-            <input class="py-1.25 pr-2.5 pl-9 border border-zinc-400 rounded-[10px] text-base w-90 outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300" type="text" name="q" placeholder="Search books by title, author, ISBN..." required />
+            <input class="py-1.25 pr-2.5 pl-9 border border-zinc-300 rounded-[10px] text-base w-90 outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300" type="text" name="q" placeholder="Search books by title, author, ISBN..." required />
             <button type="submit" hidden></button>
         </form>
 
