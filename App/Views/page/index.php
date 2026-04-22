@@ -1,7 +1,4 @@
-<?php
-require __DIR__ . '/../layout_helper.php';
-start_layout();
-?>
+<?= start_layout(); ?>
 
 <div class="home-page">
     <section class="hero">
@@ -72,4 +69,5 @@ start_layout();
         <?php endif; ?>
     </section>
 </div>
-<?php end_layout('app'); ?>
+
+<?= end_layout('app'); ?>

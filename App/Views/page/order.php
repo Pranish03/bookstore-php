@@ -1,7 +1,4 @@
-<?php
-require __DIR__ . '/../layout_helper.php';
-start_layout();
-?>
+<?= start_layout(); ?>
 
 <div>
     <h1>Order Confirmed!</h1>
@@ -58,4 +55,4 @@ start_layout();
     <a href="/orders">View all orders</a>
 </div>
 
-<?php end_layout('app'); ?>
+<?= end_layout('app'); ?>

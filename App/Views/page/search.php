@@ -1,7 +1,4 @@
-<?php
-require __DIR__ . '/../layout_helper.php';
-start_layout();
-?>
+<?= start_layout(); ?>
 
 <div>
     <h1>Search Results for "<?= htmlspecialchars($query) ?>"</h1>
@@ -20,4 +17,4 @@ start_layout();
     <?php endif; ?>
 </div>
 
-<?php end_layout('app'); ?>
+<?= end_layout('app'); ?>

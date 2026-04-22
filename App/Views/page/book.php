@@ -1,7 +1,4 @@
-<?php
-require __DIR__ . '/../layout_helper.php';
-start_layout();
-?>
+<?= start_layout(); ?>
 
 <div>
     <img src="/<?= htmlspecialchars($book['image']) ?>" alt="<?= htmlspecialchars($book['title']) ?>">
@@ -34,4 +31,4 @@ start_layout();
     </div>
 </div>
 
-<?php end_layout('app'); ?>
+<?= end_layout('app'); ?>
