@@ -3,6 +3,7 @@
 session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/../App/Helpers/helpers.php';
 
 use AltoRouter;
 
