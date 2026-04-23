@@ -18,7 +18,7 @@
     <?php endif; ?>
 
     <div class="flex items-center gap-3">
-        <form action="/admin/users" method="GET" class="flex items-center gap-2 flex-1 max-w-sm">
+        <form action="/admin/users" method="GET" class="flex items-center gap-2 flex-1 max-w-xs">
             <div class="relative flex-1">
                 <span class="absolute left-2.5 top-1/2 -translate-y-1/2 text-zinc-400 text-sm">
                     <i class="fa-solid fa-magnifying-glass"></i>
@@ -28,11 +28,9 @@
                     name="q"
                     placeholder="Search by name or email"
                     value="<?= htmlspecialchars($query) ?>"
-                    class="w-full py-1.25 pl-8 pr-2.5 border border-zinc-300 rounded-[10px] text-sm outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300 duration-200">
+                    class="w-full py-1.25 pl-8 pr-2.5 border bg-white border-zinc-300 rounded-[10px] text-sm outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300 duration-200">
             </div>
-            <button type="submit" class="py-1.25 px-2.5 border text-sm border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-1 cursor-pointer shrink-0">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                Search
+            <button type="submit" hidden>
             </button>
         </form>
         <?php if ($query): ?>
@@ -49,18 +47,17 @@
         </p>
     <?php endif; ?>
 
-    <!-- Table -->
     <div class="bg-white border border-zinc-300 rounded-[10px] overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead>
                     <tr class="border-b border-zinc-200">
-                        <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">#</th>
+                        <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">SN</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Name</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Email</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Role</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Joined</th>
-                        <th class="px-5 py-3"></th>
+                        <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -68,18 +65,22 @@
                         <tr>
                             <td colspan="6" class="px-5 py-12 text-center text-sm text-zinc-400">
                                 <i class="fa-solid fa-users text-3xl mb-3 block"></i>
-                                No users found.
+                                <p>No users found.</p>
                             </td>
                         </tr>
                     <?php else: ?>
-                        <?php foreach ($users as $user): ?>
+                        <?php foreach ($users as $i => $user): ?>
                             <tr class="border-b border-zinc-100 last:border-b-0 hover:bg-zinc-50 duration-200">
-                                <td class="px-5 py-3.5 font-medium text-zinc-900"><?= $user['id'] ?></td>
+                                <td class="px-5 py-3.5 font-medium text-zinc-900"><?= $i + 1 ?></td>
                                 <td class="px-5 py-3.5">
                                     <div class="flex items-center gap-2.5">
-                                        <div class="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-400 text-xs shrink-0 font-medium">
-                                            <?= strtoupper(substr($user['name'], 0, 1)) ?>
-                                        </div>
+                                        <?php if ($user['profile']): ?>
+                                            <img src="<?= asset($user['profile']) ?>" alt="<?= htmlspecialchars($user['name']) ?>" class="w-8.25 h-8.25 rounded-full object-cover">
+                                        <?php else: ?>
+                                            <div class="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-sm shrink-0 font-medium">
+                                                <?= strtoupper(substr($user['name'], 0, 1)) ?>
+                                            </div>
+                                        <?php endif; ?>
                                         <span class="text-zinc-900 font-medium"><?= htmlspecialchars($user['name']) ?></span>
                                     </div>
                                 </td>

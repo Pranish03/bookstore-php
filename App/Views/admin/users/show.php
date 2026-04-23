@@ -1,7 +1,6 @@
 <?= start_layout(); ?>
 
 <div class="flex flex-col gap-6">
-
     <div>
         <a href="/admin/users" class="text-sm text-zinc-500 hover:text-zinc-900 duration-200 ease-in-out flex items-center gap-1.5 w-min whitespace-nowrap mb-4">
             <i class="fa-solid fa-arrow-left-long text-xs"></i>
@@ -28,14 +27,15 @@
 
     <div class="flex flex-col lg:flex-row gap-6 items-start">
 
-        <!-- User info card -->
         <div class="bg-white border border-zinc-300 rounded-[10px] p-6 flex flex-col gap-5 w-full lg:w-80 shrink-0">
-
-            <!-- Avatar + name -->
             <div class="flex flex-col items-center gap-3 pb-5 border-b border-zinc-200">
-                <div class="w-16 h-16 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-2xl font-semibold">
-                    <?= strtoupper(substr($user['name'], 0, 1)) ?>
-                </div>
+                <?php if ($user['profile']): ?>
+                    <img src="<?= asset($user['profile']) ?>" alt="<?= htmlspecialchars($user['name']) ?>" class="w-16.25 h-16.25 rounded-full object-cover">
+                <?php else: ?>
+                    <div class="w-16 h-16 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-2xl font-semibold">
+                        <?= strtoupper(substr($user['name'], 0, 1)) ?>
+                    </div>
+                <?php endif; ?>
                 <div class="text-center">
                     <p class="font-semibold text-zinc-900"><?= htmlspecialchars($user['name']) ?></p>
                     <?php if ($user['is_admin']): ?>
@@ -52,7 +52,6 @@
                 </div>
             </div>
 
-            <!-- Details -->
             <div class="flex flex-col gap-3 text-sm">
                 <div class="flex items-start gap-2.5">
                     <i class="fa-regular fa-envelope text-zinc-400 mt-0.5 w-4 shrink-0"></i>
@@ -63,15 +62,12 @@
                     <span class="text-zinc-700">Joined <?= date('M d, Y', strtotime($user['created_at'])) ?></span>
                 </div>
             </div>
-
         </div>
 
-        <!-- Actions card -->
         <div class="bg-white border border-zinc-300 rounded-[10px] p-6 flex flex-col gap-5 flex-1 w-full">
             <h2 class="text-sm font-semibold uppercase text-zinc-500 pb-4 border-b border-zinc-200">Actions</h2>
 
             <?php if ((int) $user['id'] !== (int) $_SESSION['user']['id']): ?>
-
                 <div class="flex flex-col gap-2">
                     <p class="text-sm font-medium text-zinc-700">Admin Access</p>
                     <p class="text-sm text-zinc-500">
@@ -96,7 +92,7 @@
                 </div>
 
                 <div class="flex flex-col gap-2 pt-5 border-t border-zinc-200">
-                    <p class="text-sm font-medium text-zinc-700">Danger Zone</p>
+                    <p class="text-sm font-medium text-zinc-700">Delete This User</p>
                     <p class="text-sm text-zinc-500">Permanently delete this user account. This action cannot be undone.</p>
                     <form action="/admin/users/<?= $user['id'] ?>" method="POST"
                         onsubmit="return confirm('Delete this user? This cannot be undone.')" class="mt-1">
@@ -114,11 +110,8 @@
                     <em>This is your own account. You cannot modify it from here.</em>
                 </div>
             <?php endif; ?>
-
         </div>
-
     </div>
-
 </div>
 
 <?= end_layout('admin'); ?>

@@ -14,12 +14,12 @@
 
         <nav class="hidden md:flex items-center gap-4 shrink-0">
             <?php if (isset($_SESSION['user'])): ?>
-                <a class="w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 hover:bg-zinc-300 duration-200 ease-in rounded-full"
+                <a class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-100 rounded-full"
                     href="/orders">
                     <i class="fa-solid fa-box-open"></i>
                 </a>
 
-                <a class="w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 hover:bg-zinc-300 duration-200 ease-in rounded-full relative"
+                <a class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-100 rounded-full relative"
                     href="/cart">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span class="absolute -top-1 -right-1 bg-red-600 text-white font-medium text-xs rounded-full w-5 h-5 flex items-center justify-center">
@@ -27,11 +27,13 @@
                     </span>
                 </a>
 
-                <span class="cursor-pointer w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 hover:bg-zinc-300 duration-200 ease-in rounded-full relative" id="profileBtn">
+                <div class="relative" id="profileBtn">
                     <?php if (isset($_SESSION['user']['profile'])): ?>
-                        <img class="w-10 h-10 rounded-full object-cover" src="<?= asset($_SESSION['user']['profile']) ?>" alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>">
+                        <img class="cursor-pointer w-10 h-10 rounded-full object-cover" src="<?= asset($_SESSION['user']['profile']) ?>" alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>">
                     <?php else: ?>
-                        <i class="fa-regular fa-user"></i>
+                        <div class="cursor-pointer w-9.75 h-9.75 border border-zinc-200 rounded-full flex items-center justify-center text-xl text-zinc-500 bg-zinc-100">
+                            <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
+                        </div>
                     <?php endif; ?>
 
                     <div class="hidden absolute top-14 right-0 bg-white shadow rounded-[10px] border border-zinc-200 w-56 cursor-default" id="profileMenu">
@@ -39,8 +41,8 @@
                             <?php if (isset($_SESSION['user']['profile'])): ?>
                                 <img class="w-10 h-10 rounded-full object-cover" src="<?= asset($_SESSION['user']['profile']) ?>" alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>">
                             <?php else: ?>
-                                <div class="w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 rounded-full shrink-0">
-                                    <i class="fa-regular fa-user"></i>
+                                <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-base shrink-0 font-medium">
+                                    <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
                                 </div>
                             <?php endif; ?>
 
@@ -69,7 +71,7 @@
                             </form>
                         </div>
                     </div>
-                </span>
+                </div>
 
             <?php else: ?>
                 <a class="py-1.25 px-2.5 border text-base border-zinc-300 hover:bg-zinc-100 duration-200 ease-in-out rounded-[10px]" href="/login">
@@ -85,7 +87,7 @@
 
         <div class="flex md:hidden items-center gap-3">
             <?php if (isset($_SESSION['user'])): ?>
-                <a class="w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 hover:bg-zinc-300 duration-200 ease-in rounded-full relative" href="/cart">
+                <a class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-200 rounded-full relative" href="/cart">
                     <i class="fa-solid fa-bag-shopping"></i>
                     <span class="absolute -top-1 -right-1 bg-red-600 text-white font-medium text-xs rounded-full w-5 h-5 flex items-center justify-center">
                         <?= cartCount() ?>
@@ -93,7 +95,7 @@
                 </a>
             <?php endif; ?>
             <button id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false"
-                class="w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 hover:bg-zinc-300 duration-200 ease-in rounded-full cursor-pointer border-0">
+                class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-200 rounded-full cursor-pointer">
                 <i id="mobileMenuIcon" class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -115,8 +117,8 @@
                 <?php if (isset($_SESSION['user']['profile'])): ?>
                     <img class="w-10 h-10 rounded-full object-cover shrink-0" src="<?= asset($_SESSION['user']['profile']) ?>" alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>">
                 <?php else: ?>
-                    <div class="w-10 h-10 flex items-center justify-center text-xl bg-zinc-200 rounded-full shrink-0">
-                        <i class="fa-regular fa-user"></i>
+                    <div class="w-10 h-10 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-base shrink-0 font-medium">
+                        <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
                     </div>
                 <?php endif; ?>
                 <div class="overflow-hidden">
