@@ -147,15 +147,19 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                 </h2>
 
                 <form action="/profile/change-password" method="POST" class="flex flex-col gap-5">
-
                     <div class="flex flex-col gap-1.5">
                         <label for="current_password" class="text-sm font-medium text-zinc-700">Current Password</label>
-                        <input
-                            type="password"
-                            id="current_password"
-                            name="current_password"
-                            placeholder="Enter your current password"
-                            class="py-1.25 px-2.5 border <?= !empty($errors['current_password']) ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : 'border-zinc-300 focus:border-zinc-900 focus:ring-zinc-300' ?> rounded-[10px] text-base outline-none focus:ring-3 duration-200 max-w-sm">
+                        <div class="flex items-center relative md:w-sm w-full">
+                            <input
+                                type="password"
+                                id="current_password"
+                                name="current_password"
+                                placeholder="Enter your current password"
+                                class="py-1.25 px-2.5 border w-full <?= !empty($errors['current_password']) ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : 'border-zinc-300 focus:border-zinc-900 focus:ring-zinc-300' ?> rounded-[10px] text-base outline-none focus:ring-3 duration-200">
+                            <button type="button" id="togglePassword" class="absolute right-2.5 text-zinc-400 hover:text-zinc-500 duration-200 cursor-pointer">
+                                <i id="toggleIcon" class="fa-solid fa-eye"></i>
+                            </button>
+                        </div>
                         <?php if (!empty($errors['current_password'])): ?>
                             <span class="text-sm text-red-600 flex items-center gap-1">
                                 <i class="fa-solid fa-circle-exclamation text-xs"></i>
@@ -167,12 +171,18 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                         <div class="flex flex-col gap-1.5">
                             <label for="new_password" class="text-sm font-medium text-zinc-700">New Password</label>
-                            <input
-                                type="password"
-                                id="new_password"
-                                name="new_password"
-                                placeholder="At least 8 characters"
-                                class="py-1.25 px-2.5 border <?= !empty($errors['new_password']) ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : 'border-zinc-300 focus:border-zinc-900 focus:ring-zinc-300' ?> rounded-[10px] text-base outline-none focus:ring-3 duration-200">
+                            <div class="flex items-center relative">
+                                <input
+                                    type="password"
+                                    id="new_password"
+                                    name="new_password"
+                                    placeholder="At least 8 characters"
+                                    class="py-1.25 px-2.5 border w-full <?= !empty($errors['new_password']) ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : 'border-zinc-300 focus:border-zinc-900 focus:ring-zinc-300' ?> rounded-[10px] text-base outline-none focus:ring-3 duration-200">
+                                <button type="button" id="toggleNewPassword" class="absolute right-2.5 text-zinc-400 hover:text-zinc-500 duration-200 cursor-pointer">
+                                    <i id="toggleNewIcon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+
                             <?php if (!empty($errors['new_password'])): ?>
                                 <span class="text-sm text-red-600 flex items-center gap-1">
                                     <i class="fa-solid fa-circle-exclamation text-xs"></i>
@@ -183,12 +193,17 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
 
                         <div class="flex flex-col gap-1.5">
                             <label for="confirm_password" class="text-sm font-medium text-zinc-700">Confirm New Password</label>
-                            <input
-                                type="password"
-                                id="confirm_password"
-                                name="confirm_password"
-                                placeholder="Repeat your new password"
-                                class="py-1.25 px-2.5 border <?= !empty($errors['confirm_password']) ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : 'border-zinc-300 focus:border-zinc-900 focus:ring-zinc-300' ?> rounded-[10px] text-base outline-none focus:ring-3 duration-200">
+                            <div class="flex items-center relative">
+                                <input
+                                    type="password"
+                                    id="confirm_password"
+                                    name="confirm_password"
+                                    placeholder="Repeat your new password"
+                                    class="py-1.25 px-2.5 border w-full <?= !empty($errors['confirm_password']) ? 'border-red-400 focus:border-red-400 focus:ring-red-200' : 'border-zinc-300 focus:border-zinc-900 focus:ring-zinc-300' ?> rounded-[10px] text-base outline-none focus:ring-3 duration-200">
+                                <button type="button" id="toggleConfirmPassword" class="absolute right-2.5 text-zinc-400 hover:text-zinc-500 duration-200 cursor-pointer">
+                                    <i id="toggleConfirmIcon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
                             <?php if (!empty($errors['confirm_password'])): ?>
                                 <span class="text-sm text-red-600 flex items-center gap-1">
                                     <i class="fa-solid fa-circle-exclamation text-xs"></i>
