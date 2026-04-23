@@ -24,26 +24,26 @@
         <?php endforeach; ?>
     </nav>
 
-    <div class="p-4 relative">
+    <div class="p-4 relative" id="profileBtn">
         <button class="flex mb-2 items-center justify-between px-3 py-2.5 hover:bg-zinc-100 rounded-[10px] text-sm font-medium text-zinc-900 duration-200 ease-in-out cursor-pointer border-0 bg-transparent w-full text-left">
             <div class="flex items-center gap-3">
                 <?php if (!empty($_SESSION['user']['profile'])): ?>
-                    <img src="<?= asset($_SESSION['user']['profile']) ?>" alt="avatar" class="w-8 h-8 rounded-full object-cover shrink-0">
+                    <img src="<?= asset($_SESSION['user']['profile']) ?>" alt="avatar" class="w-10 h-10 rounded-full object-cover shrink-0">
                 <?php else: ?>
-                    <div class="w-8 h-8 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-sm shrink-0 font-medium">
+                    <div class="w-9.75 h-9.75 rounded-full bg-zinc-100 border border-zinc-200 flex items-center justify-center text-zinc-500 text-base shrink-0 font-medium">
                         <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
                     </div>
                 <?php endif; ?>
-                <div class="overflow-hidden text-left">
-                    <p class="text-sm font-medium text-zinc-900 truncate"><?= htmlspecialchars($_SESSION['user']['name'] ?? '') ?></p>
-                    <p class="text-xs text-zinc-500 truncate"><?= htmlspecialchars($_SESSION['user']['email'] ?? '') ?></p>
+                <div class="overflow-hidden text-left leading-tight">
+                    <p class="text-base font-medium text-zinc-900 truncate"><?= htmlspecialchars($_SESSION['user']['name'] ?? '') ?></p>
+                    <p class="text-sm text-zinc-500 truncate"><?= htmlspecialchars($_SESSION['user']['email'] ?? '') ?></p>
                 </div>
             </div>
 
             <i class="fa-solid fa-ellipsis-vertical"></i>
         </button>
 
-        <div class="absolute bottom-6 -right-54 bg-white shadow rounded-[10px] border border-zinc-200 w-56 cursor-default" id="profileMenu">
+        <div class="hidden absolute md:bottom-6 bottom-24 md:-right-54 right-8 bg-white shadow rounded-[10px] border border-zinc-200 w-56 cursor-default" id="profileMenu">
             <div class="flex items-center gap-2 px-2 py-2.5 border-b border-zinc-200">
                 <?php if (isset($_SESSION['user']['profile'])): ?>
                     <img class="w-10 h-10 rounded-full object-cover" src="<?= asset($_SESSION['user']['profile']) ?>" alt="<?= htmlspecialchars($_SESSION['user']['name']) ?>">

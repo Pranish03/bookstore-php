@@ -55,16 +55,16 @@
                         </div>
 
                         <div class="flex flex-col p-1 text-base">
-                            <a class="px-3 py-1.5 rounded-[10px] hover:bg-zinc-200 duration-200 ease-in-out flex items-center gap-2" href="/profile">
-                                <i class="fa-regular fa-circle-user"></i>
-                                Account
-                            </a>
                             <?php if ($_SESSION['user']['is_admin']): ?>
                                 <a class="px-3 py-1.5 rounded-[10px] hover:bg-zinc-200 duration-200 ease-in-out flex items-center gap-2" href="/admin">
                                     <i class="fa-solid fa-gauge-high"></i>
                                     Dashboard
                                 </a>
                             <?php endif; ?>
+                            <a class="px-3 py-1.5 rounded-[10px] hover:bg-zinc-200 duration-200 ease-in-out flex items-center gap-2" href="/profile">
+                                <i class="fa-regular fa-circle-user"></i>
+                                Account
+                            </a>
                             <form action="/logout" method="post">
                                 <button type="submit" class="px-3.25 py-1.5 rounded-[10px] hover:bg-red-100 w-full text-left cursor-pointer duration-200 ease-in-out flex items-center gap-2 text-red-600">
                                     <i class="fa-solid fa-arrow-right-from-bracket"></i>
