@@ -33,4 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
         : "fa-solid fa-xmark";
     });
   }
+
+  const desktopBtn = document.getElementById("desktopCheckoutBtn");
+  const checkoutForm = document.querySelector('form[action="/checkout"]');
+  if (desktopBtn && checkoutForm) {
+    desktopBtn.addEventListener("click", function () {
+      checkoutForm.submit();
+    });
+  }
 });

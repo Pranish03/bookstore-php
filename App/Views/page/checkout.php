@@ -156,16 +156,4 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
     </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const desktopBtn = document.getElementById('desktopCheckoutBtn');
-        const checkoutForm = document.querySelector('form[action="/checkout"]');
-        if (desktopBtn && checkoutForm) {
-            desktopBtn.addEventListener('click', function() {
-                checkoutForm.submit();
-            });
-        }
-    });
-</script>
-
 <?= end_layout('app'); ?>
