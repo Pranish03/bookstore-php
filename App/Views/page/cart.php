@@ -35,10 +35,10 @@
                 <div class="flex-1 w-full flex flex-col gap-3">
 
                     <div class="hidden md:grid grid-cols-12 gap-4 px-4 py-2 text-xs uppercase font-semibold text-zinc-500">
-                        <div class="col-span-5">Book</div>
+                        <div class="col-span-4">Book</div>
                         <div class="col-span-2 text-right">Price</div>
                         <div class="col-span-3 text-center">Quantity</div>
-                        <div class="col-span-1 text-right">Subtotal</div>
+                        <div class="col-span-2 text-right">Subtotal</div>
                         <div class="col-span-1"></div>
                     </div>
 
