@@ -56,7 +56,7 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                     </div>
 
                     <div class="flex-1 flex flex-col gap-3">
-                        <div class="flex items-center gap-3">
+                        <div class="flex md:flex-row flex-col-reverse md:items-center items-start gap-3">
                             <form action="/profile/upload-avatar" method="POST" enctype="multipart/form-data" class="flex flex-col sm:flex-row sm:items-center gap-3">
                                 <input
                                     type="file"
@@ -64,7 +64,7 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                                     name="avatar"
                                     accept="image/jpeg,image/png,image/webp"
                                     class="py-1.25 px-2.5 border border-zinc-300 rounded-[10px] text-sm text-zinc-700 outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300 duration-200 file:mr-3 file:py-1 file:px-2.5 file:rounded-lg file:border-0 file:text-xs file:font-medium file:bg-zinc-100 file:text-zinc-700 hover:file:bg-zinc-200 file:cursor-pointer w-full sm:w-auto">
-                                <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-2 cursor-pointer shrink-0">
+                                <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-1 cursor-pointer shrink-0 max-w-min">
                                     <i class="fa-solid fa-arrow-up-from-bracket"></i>
                                     Upload
                                 </button>
@@ -131,7 +131,7 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                     </div>
 
                     <div>
-                        <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-2 cursor-pointer">
+                        <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-1 cursor-pointer">
                             <i class="fa-solid fa-floppy-disk"></i>
                             Save Changes
                         </button>
@@ -199,7 +199,7 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                     </div>
 
                     <div>
-                        <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-2 cursor-pointer">
+                        <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-1 cursor-pointer">
                             <i class="fa-solid fa-key"></i>
                             Update Password
                         </button>

@@ -47,13 +47,20 @@
                     <?php endif; ?>
                 </div>
 
-                <form action="/cart/add" method="POST">
-                    <input type="hidden" name="book_id" value="<?= (int) $book['id'] ?>">
-                    <button type="submit" class="py-1.5 px-3 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-1 cursor-pointer">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        Add to Cart
+                <div class="flex items-center gap-4">
+                    <form action="/cart/add" method="POST">
+                        <input type="hidden" name="book_id" value="<?= (int) $book['id'] ?>">
+                        <button type="submit" class="py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center gap-1 cursor-pointer">
+                            <i class="fa-solid fa-circle-plus"></i>
+                            Add to Cart
+                        </button>
+                    </form>
+
+                    <button class="py-1.25 px-2.5 border text-base border-zinc-300 hover:bg-zinc-100 rounded-[10px] duration-200 ease-in-out flex items-center gap-1 cursor-pointer">
+                        <i class="fa-regular fa-heart"></i>
+                        Add to Wishlist
                     </button>
-                </form>
+                </div>
 
                 <div class="pb-6 border-b border-zinc-300">
                     <h2 class="text-sm font-semibold uppercase text-zinc-500 mb-3">About this book</h2>

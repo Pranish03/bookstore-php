@@ -145,7 +145,7 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                     </div>
 
                     <button id="desktopCheckoutBtn" type="button"
-                        class="hidden lg:flex w-full py-1.5 px-3 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out items-center justify-center gap-1 cursor-pointer">
+                        class="hidden lg:flex w-full py-1.25 px-2.5 border text-base border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out items-center justify-center gap-1 cursor-pointer">
                         <i class="fa-solid fa-money-bill-wave"></i>
                         Place Order (Cash on Delivery)
                     </button>
