@@ -49,8 +49,8 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                                 alt="<?= htmlspecialchars($user['name']) ?>"
                                 class="w-20 h-20 rounded-full object-cover border border-zinc-300">
                         <?php else: ?>
-                            <div class="w-20 h-20 rounded-full bg-zinc-100 border border-zinc-300 flex items-center justify-center text-zinc-400 text-2xl">
-                                <i class="fa-regular fa-user"></i>
+                            <div class="w-20 h-20 rounded-full bg-zinc-100 border border-zinc-300 flex items-center justify-center text-zinc-500 text-3xl">
+                                <?= strtoupper(substr($_SESSION['user']['name'], 0, 1)) ?>
                             </div>
                         <?php endif; ?>
                     </div>

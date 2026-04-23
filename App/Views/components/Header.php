@@ -22,9 +22,11 @@
                 <a class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-100 rounded-full relative"
                     href="/cart">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-600 text-white font-medium text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                        <?= cartCount() ?>
-                    </span>
+                    <?php if (cartCount() > 0): ?>
+                        <span class="absolute -top-1 -right-1 bg-red-600 text-white font-medium text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                            <?= cartCount() ?>
+                        </span>
+                    <?php endif; ?>
                 </a>
 
                 <div class="relative" id="profileBtn">
@@ -87,15 +89,17 @@
 
         <div class="flex md:hidden items-center gap-3">
             <?php if (isset($_SESSION['user'])): ?>
-                <a class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-200 rounded-full relative" href="/cart">
+                <a class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-100 rounded-full relative" href="/cart">
                     <i class="fa-solid fa-bag-shopping"></i>
-                    <span class="absolute -top-1 -right-1 bg-red-600 text-white font-medium text-xs rounded-full w-5 h-5 flex items-center justify-center">
-                        <?= cartCount() ?>
-                    </span>
+                    <?php if (cartCount() > 0): ?>
+                        <span class="absolute -top-1 -right-1 bg-red-600 text-white font-medium text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                            <?= cartCount() ?>
+                        </span>
+                    <?php endif; ?>
                 </a>
             <?php endif; ?>
             <button id="mobileMenuBtn" aria-label="Toggle menu" aria-expanded="false"
-                class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-200 rounded-full cursor-pointer">
+                class="w-9.75 h-9.75 border border-zinc-200 flex items-center justify-center text-xl bg-zinc-100 rounded-full cursor-pointer">
                 <i id="mobileMenuIcon" class="fa-solid fa-bars"></i>
             </button>
         </div>
