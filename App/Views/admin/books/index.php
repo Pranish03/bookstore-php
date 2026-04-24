@@ -88,9 +88,9 @@
                                         <img src="/<?= htmlspecialchars($book['image']) ?>"
                                             alt="<?= htmlspecialchars($book['title']) ?>"
                                             class="w-8.25 h-10.25 object-cover rounded-[10px] shrink-0">
-                                        <a href="/admin/books/<?= $book['id'] ?>" class="font-medium text-zinc-900 hover:underline">
+                                        <span class="font-medium text-zinc-900">
                                             <?= htmlspecialchars($book['title']) ?>
-                                        </a>
+                                        </span>
                                     </div>
                                 </td>
                                 <td class="px-5 py-3.5 text-zinc-900"><?= htmlspecialchars($book['author']) ?></td>

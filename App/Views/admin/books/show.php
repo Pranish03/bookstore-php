@@ -85,7 +85,7 @@ $discounted = $book['price'] - ($book['price'] * $book['discount'] / 100);
 
             <div class="bg-white border border-zinc-300 rounded-[10px] p-5 flex flex-col gap-4">
                 <h2 class="text-sm font-semibold uppercase text-zinc-500 pb-4 border-b border-zinc-200">Description</h2>
-                <p class="text-sm text-zinc-700 leading-relaxed"><?= htmlspecialchars($book['description']) ?></p>
+                <p class="text-sm text-zinc-700 leading-relaxed"><?= nl2br(htmlspecialchars($book['description'])) ?></p>
             </div>
 
             <div class="bg-white border border-zinc-300 rounded-[10px] p-5 flex flex-col gap-4">

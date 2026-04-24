@@ -154,13 +154,20 @@ $dot   = $dotStyles[$order['status']]   ?? 'bg-zinc-400';
             <div class="bg-white border border-zinc-300 rounded-[10px] p-5 flex flex-col gap-4">
                 <h2 class="text-sm font-semibold uppercase text-zinc-500 pb-4 border-b border-zinc-200">Update Status</h2>
                 <form action="/admin/orders/<?= $order['id'] ?>/status" method="POST" class="flex flex-col gap-3">
-                    <select name="status" class="py-1.25 px-2.5 border border-zinc-300 rounded-[10px] text-sm text-zinc-700 outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300 duration-200 bg-white w-full">
-                        <?php foreach (['pending', 'processing', 'shipped', 'delivered', 'cancelled'] as $status): ?>
-                            <option value="<?= $status ?>" <?= $order['status'] === $status ? 'selected' : '' ?>>
-                                <?= ucfirst($status) ?>
-                            </option>
-                        <?php endforeach; ?>
-                    </select>
+                    <div class="relative flex items-center">
+
+                        <select name="status" class="py-1.25 px-2.5 z-10 appearance-none border border-zinc-300 rounded-[10px] text-sm text-zinc-700 outline-none focus:border-zinc-900 focus:ring-3 focus:ring-zinc-300 duration-200 bg-transparent w-full">
+                            <?php foreach (['pending', 'processing', 'shipped', 'delivered', 'cancelled'] as $status): ?>
+                                <option value="<?= $status ?>" <?= $order['status'] === $status ? 'selected' : '' ?>>
+                                    <?= ucfirst($status) ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+
+                        <span class="absolute right-3 text-xs">
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </span>
+                    </div>
                     <button type="submit" class="py-1.25 px-2.5 border text-sm border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center justify-center gap-1 cursor-pointer w-full">
                         <i class="fa-solid fa-arrow-rotate-right"></i>
                         Update Status

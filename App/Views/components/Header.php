@@ -1,4 +1,4 @@
-<header class="bg-white border-b border-zinc-300 sticky top-0 z-50">
+<header class="bg-white md:border-b border-0 border-zinc-300 sticky top-0 z-50">
     <div class="max-w-300 mx-auto flex items-center justify-between py-4 px-6">
         <h1 class="font-serif text-[32px] font-bold shrink-0">
             <a href="/">Bookstore</a>

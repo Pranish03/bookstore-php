@@ -64,7 +64,7 @@
 
                 <div class="pb-6 border-b border-zinc-300">
                     <h2 class="text-sm font-semibold uppercase text-zinc-500 mb-3">About this book</h2>
-                    <p class="text-base text-zinc-700 leading-relaxed"><?= htmlspecialchars($book['description']) ?></p>
+                    <p class="text-base text-zinc-700 leading-relaxed"><?= nl2br(htmlspecialchars($book['description'])) ?></p>
                 </div>
 
                 <div>
