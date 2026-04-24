@@ -59,8 +59,10 @@
                 <thead>
                     <tr class="border-b border-zinc-200">
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">SN</th>
+                        <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Book</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Title</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Author</th>
+                        <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">ISBN</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Original Price</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Discount Price</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Actions</th>
@@ -79,7 +81,8 @@
                             $discounted = $book['price'] - ($book['price'] * $book['discount'] / 100);
                         ?>
                             <tr class="border-b border-zinc-100 last:border-b-0 hover:bg-zinc-50 duration-200">
-                                <td class="px-5 py-3.5 text-zinc-500"><?= ++$index ?></td>
+                                <td class="px-5 py-3.5 text-zinc-900"><?= ++$index ?></td>
+                                <td class="px-5 py-3.5 font-medium text-zinc-900">#<?= $book['id'] ?></td>
                                 <td class="px-5 py-3.5">
                                     <div class="flex items-center gap-3">
                                         <img src="/<?= htmlspecialchars($book['image']) ?>"
@@ -90,7 +93,8 @@
                                         </a>
                                     </div>
                                 </td>
-                                <td class="px-5 py-3.5 text-zinc-500"><?= htmlspecialchars($book['author']) ?></td>
+                                <td class="px-5 py-3.5 text-zinc-900"><?= htmlspecialchars($book['author']) ?></td>
+                                <td class="px-5 py-3.5 text-zinc-900"><?= htmlspecialchars($book['isbn']) ?></td>
                                 <td class="px-5 py-3.5 text-zinc-500 whitespace-nowrap">
                                     <?php if ($book['discount'] > 0): ?>
                                         <span class="line-through">Rs. <?= number_format($book['price'], 2) ?></span>

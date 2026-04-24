@@ -53,6 +53,7 @@
                 <thead>
                     <tr class="border-b border-zinc-200">
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">SN</th>
+                        <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">User</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Name</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Email</th>
                         <th class="text-left text-xs font-semibold uppercase text-zinc-500 px-5 py-3">Role</th>
@@ -72,6 +73,7 @@
                         <?php foreach ($users as $i => $user): ?>
                             <tr class="border-b border-zinc-100 last:border-b-0 hover:bg-zinc-50 duration-200">
                                 <td class="px-5 py-3.5 font-medium text-zinc-900"><?= $i + 1 ?></td>
+                                <td class="px-5 py-3.5 font-medium text-zinc-900">#<?= $user['id'] ?></td>
                                 <td class="px-5 py-3.5">
                                     <div class="flex items-center gap-2.5">
                                         <?php if ($user['profile']): ?>
