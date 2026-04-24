@@ -7,7 +7,7 @@
                 <span class="inline-block h-2 w-2 rounded-full bg-green-600"></span>
                 New arrivals every week
             </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif leading-tight">
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-bold font-serif leading-20">
                 Your next great<br>
                 <span class="text-zinc-500">read awaits.</span>
             </h1>

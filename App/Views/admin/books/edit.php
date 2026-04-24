@@ -163,9 +163,6 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                 <div class="bg-white border border-zinc-300 rounded-[10px] p-5 flex flex-col gap-5">
                     <h2 class="text-sm font-semibold uppercase text-zinc-500 pb-4 border-b border-zinc-200">Cover Image</h2>
                     <div class="flex flex-col gap-1.5">
-                        <?php if (!empty($book['image'])): ?>
-                            <img src="/<?= htmlspecialchars($book['image']) ?>" class="rounded-lg border border-zinc-200">
-                        <?php endif; ?>
                         <input
                             type="file"
                             id="image"

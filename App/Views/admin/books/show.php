@@ -69,15 +69,15 @@ $discounted = $book['price'] - ($book['price'] * $book['discount'] / 100);
                         <?php endif; ?>
                     </div>
                     <?php if ($book['discount'] > 0): ?>
+                        <div class="flex flex-col gap-1.5">
+                            <p class="text-xs text-zinc-500 uppercase font-medium">Sale Price</p>
+                            <p class="text-base font-bold text-zinc-900">Rs. <?= number_format($discounted, 2) ?></p>
+                        </div>
                         <div class="flex flex-col gap-1">
                             <p class="text-xs text-zinc-500 uppercase font-medium">Discount</p>
                             <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border text-xs font-medium bg-green-50 text-green-700 border-green-200 w-min whitespace-nowrap">
                                 -<?= (int) $book['discount'] ?>% off
                             </span>
-                        </div>
-                        <div class="flex flex-col gap-1.5">
-                            <p class="text-xs text-zinc-500 uppercase font-medium">Sale Price</p>
-                            <p class="text-base font-bold text-zinc-900">Rs. <?= number_format($discounted, 2) ?></p>
                         </div>
                     <?php endif; ?>
                 </div>
