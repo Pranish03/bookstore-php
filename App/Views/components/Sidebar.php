@@ -1,4 +1,4 @@
-<aside id="sidebar" class="fixed md:sticky top-0 left-0 h-screen w-72 bg-white border-r border-zinc-300 flex flex-col z-50 -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out shrink-0">
+<aside id="sidebar" class="fixed md:sticky top-0 left-0 h-screen w-80 bg-white border-r border-zinc-300 flex flex-col z-50 -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out shrink-0">
     <div class="px-5 py-5">
         <a href="/admin" class="font-serif text-3xl font-bold text-zinc-900">Bookstore</a>
     </div>

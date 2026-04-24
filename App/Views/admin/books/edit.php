@@ -223,7 +223,7 @@ unset($_SESSION['errors'], $_SESSION['old_input']);
                 </div>
 
                 <button type="submit" class="py-1.25 px-2.5 border text-sm border-zinc-900 bg-zinc-900 text-white rounded-[10px] hover:bg-zinc-700 hover:border-zinc-700 duration-200 ease-in-out flex items-center justify-center gap-1 cursor-pointer w-full">
-                    <i class="fa-solid fa-pen-nib"></i>
+                    <i class="fa-solid fa-arrow-rotate-right"></i>
                     Update Book
                 </button>
             </div>
