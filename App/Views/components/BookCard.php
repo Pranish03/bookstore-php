@@ -14,7 +14,7 @@
 
     <div class="bg-white p-3">
         <p class="text-sm uppercase font-medium text-zinc-500 mb-1"><?= htmlspecialchars($book['author']) ?></p>
-        <h3 class="font-semibold text-base mb-1"><?= htmlspecialchars($book['title']) ?></h3>
+        <h3 class="font-semibold text-base mb-1 truncate"><?= htmlspecialchars($book['title']) ?></h3>
 
         <div class="flex items-center gap-2">
             <?php if ($book['discount'] > 0): ?>
