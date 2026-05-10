@@ -5,7 +5,6 @@
 
 A full-featured e-commerce platform built with PHP for managing books, orders, and user accounts.
 
----
 
 ## Features
 
@@ -16,7 +15,6 @@ A full-featured e-commerce platform built with PHP for managing books, orders, a
 - **Order Tracking** – Real-time order status updates
 - **Responsive Design** – Mobile, tablet, and desktop ready
 
----
 
 ## Tech Stack
 
@@ -28,7 +26,6 @@ A full-featured e-commerce platform built with PHP for managing books, orders, a
 | Frontend | Tailwind CSS |
 | Auth | Session-based with password hashing |
 
----
 
 ## Installation
 
@@ -67,7 +64,6 @@ Open [http://localhost:8000](http://localhost:8000).
 
 > **Docker:** `docker-compose up -d` (requires `docker-compose.yml` configured for MySQL and PHP-FPM)
 
----
 
 ## Usage
 
@@ -84,26 +80,24 @@ Open [http://localhost:8000](http://localhost:8000).
 | `/checkout` | Checkout |
 | `/orders` | View orders |
 
----
 
 ## Project Structure
 
 ```
 bookstore-php/
-├── App/
-│   ├── Controllers/       # Business logic
-│   ├── Models/            # Database interactions
-│   ├── Middlewares/       # Auth & authorization
-│   ├── Validation/        # Form validation
-│   ├── Views/             # Templates (PHP + Tailwind)
-│   └── Helpers/           # Utility functions
-├── public/                # Static files
-├── config/                # Configuration
-├── routes/                # Route definitions
-└── schema/                # Database schema
+|-- App/
+│   |-- Controllers/       # Business logic
+│   |-- Models/            # Database interactions
+│   |-- Middlewares/       # Auth & authorization
+│   |-- Validation/        # Form validation
+│   |-- Views/             # Templates (PHP + Tailwind)
+│   |-- Helpers/           # Utility functions
+|-- public/                # Static files
+|-- config/                # Configuration
+|-- routes/                # Route definitions
+|-- schema/                # Database schema
 ```
 
----
 
 ## Configuration
 
@@ -116,7 +110,6 @@ bookstore-php/
 
 To customize the theme, edit `App/Views/global.css`.
 
----
 
 ## Roadmap
 
@@ -125,7 +118,6 @@ To customize the theme, edit `App/Views/global.css`.
 - [ ] Mobile app API
 - [ ] Analytics dashboard
 
----
 
 ## License
 
